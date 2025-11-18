@@ -1,0 +1,25 @@
+:root {
+  /* Colors */
+  --bg-color: #141516;
+  --text-color: #A1A1A2;
+  --heading-color: #FFFFFF;
+  --accent-color: #EABE7B;
+  --border-color: rgba(255, 255, 255, 0.1);
+
+  /* Fonts */
+  --font-heading: 'DM Serif Display', serif;
+  --font-body: 'Public Sans', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+  --container-width: 1400px;
+  --header-height: 80px;
+
+  /* Transitions */
+  --transition-fast: 0.3s ease;
+  --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
