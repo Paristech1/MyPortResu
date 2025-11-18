@@ -113,6 +113,290 @@ section {
     color: var(--accent-color);
 }
 
+/* Experience & Education */
+.experience {
+    background: var(--bg-color);
+}
+
+.experience-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.experience-header h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: var(--spacing-md);
+}
+
+.experience-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+/* Timeline */
+.section-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.timeline {
+    position: relative;
+    padding-left: var(--spacing-lg);
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 2.5rem;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-color);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: var(--spacing-lg);
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2.75rem;
+    top: 0.5rem;
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid var(--bg-color);
+    border-radius: 50%;
+}
+
+.timeline-item.featured .timeline-marker {
+    width: 32px;
+    height: 32px;
+    background: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid var(--bg-color);
+    left: -3.25rem;
+}
+
+.timeline-marker.featured-marker svg {
+    width: 16px;
+    height: 16px;
+    color: var(--bg-color);
+}
+
+.timeline-content h4 {
+    font-size: 1.25rem;
+    color: var(--heading-color);
+    margin-bottom: 0.25rem;
+}
+
+.job-title {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.job-date {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-bottom: 0.75rem;
+}
+
+.job-description {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.job-duties {
+    list-style: disc;
+    margin-left: 1.25rem;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.job-duties li {
+    margin-bottom: 0.5rem;
+}
+
+/* Sidebar */
+.experience-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.sidebar-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    backdrop-filter: blur(10px);
+}
+
+.sidebar-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Certification Tags */
+.cert-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.cert-tag {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 20px;
+    border: 1px solid;
+    white-space: nowrap;
+}
+
+.cert-tag.cloud {
+    background: rgba(56, 189, 248, 0.1);
+    color: #7dd3fc;
+    border-color: rgba(56, 189, 248, 0.3);
+}
+
+.cert-tag.security {
+    background: rgba(52, 211, 153, 0.1);
+    color: #6ee7b7;
+    border-color: rgba(52, 211, 153, 0.3);
+}
+
+.cert-tag.other {
+    background: rgba(192, 132, 252, 0.1);
+    color: #c084fc;
+    border-color: rgba(192, 132, 252, 0.3);
+}
+
+/* Volunteering */
+.volunteer-section {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+.volunteer-section h4 {
+    font-size: 0.95rem;
+    color: var(--heading-color);
+    margin-bottom: 0.75rem;
+}
+
+.volunteer-section ul {
+    list-style: none;
+}
+
+.volunteer-section li {
+    display: flex;
+    align-items: start;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.volunteer-section .star {
+    color: var(--accent-color);
+    font-size: 1rem;
+}
+
+/* Skills List */
+.skills-list {
+    list-style: none;
+}
+
+.skills-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+.skills-list li::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Education */
+.education-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.education-item {
+    background: rgba(255, 255, 255, 0.02);
+    padding: var(--spacing-sm);
+    border-radius: 6px;
+    border-left: 3px solid var(--border-color);
+}
+
+.education-item.primary {
+    border-left-color: var(--accent-color);
+}
+
+.education-item h4 {
+    font-size: 1rem;
+    color: var(--heading-color);
+    margin-bottom: 0.25rem;
+}
+
+.education-item p {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .experience-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .experience-sidebar {
+        order: 2;
+    }
+
+    .experience-timeline {
+        order: 1;
+    }
+}
+
 /* Floating Logos */
 .icons {
     display: inline-block;
