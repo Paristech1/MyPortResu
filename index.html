@@ -10,11 +10,12 @@
 
 <body>
   <header class="header">
-    <div class="logo">Paris.</div>
+    <div class="logo"><span class="highlight">Paris</span>.</div>
     <nav class="nav">
       <ul>
-        <li><a href="#work">Work</a></li>
         <li><a href="#about">About</a></li>
+        <li><a href="#experience">Work</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -265,38 +266,126 @@
       </div>
     </section>
 
-    <section id="work" class="work">
-      <div class="container">
-        <h2 class="reveal-text" style="margin-bottom: 2rem;">Selected Work</h2>
 
-        <div class="projects-list" style="margin-top: 4rem;">
-          <article class="project-item">
-            <div class="project-info">
-              <h3>Ethereal</h3>
-              <p>Web Design & Development</p>
+
+    <section id="projects" class="projects">
+      <div class="container">
+        <div class="projects-header">
+          <h2 class="reveal-text">Recent Projects</h2>
+          <p class="reveal-text projects-subtitle">
+            Here are some of my favorite projects I have built recently. Feel free to check them out.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <!-- Project Card 1 -->
+          <article class="project-card">
+            <div class="project-card-image">
+              <img src="https://picsum.photos/seed/proj1/600/400" alt="Home Lab Setup">
             </div>
-            <div class="project-image">
-              <img src="https://picsum.photos/seed/p1/800/500" alt="Project 1">
+            <div class="project-card-content">
+              <h3>Home Lab Infrastructure</h3>
+              <p>Built a complete home lab environment for hands-on practice with enterprise IT infrastructure,
+                networking, and security tools.</p>
+              <div class="project-tags">
+                <span class="tag">Virtualization</span>
+                <span class="tag">Networking</span>
+                <span class="tag">Security</span>
+              </div>
             </div>
           </article>
-          <article class="project-item">
-            <div class="project-info">
-              <h3>Nexus</h3>
-              <p>Brand Identity</p>
+
+          <!-- Project Card 2 -->
+          <article class="project-card">
+            <div class="project-card-image">
+              <img src="https://picsum.photos/seed/proj2/600/400" alt="SIEM Dashboard">
             </div>
-            <div class="project-image">
-              <img src="https://picsum.photos/seed/p2/800/500" alt="Project 2">
+            <div class="project-card-content">
+              <h3>SIEM Dashboard Implementation</h3>
+              <p>Deployed and configured a Security Information and Event Management system for real-time threat
+                detection and log analysis.</p>
+              <div class="project-tags">
+                <span class="tag">Security</span>
+                <span class="tag">Log Analysis</span>
+                <span class="tag">Monitoring</span>
+              </div>
             </div>
           </article>
-          <article class="project-item">
-            <div class="project-info">
-              <h3>Vanguard</h3>
-              <p>Creative Direction</p>
+
+          <!-- Project Card 3 -->
+          <article class="project-card">
+            <div class="project-card-image">
+              <img src="https://picsum.photos/seed/proj3/600/400" alt="Cloud Infrastructure">
             </div>
-            <div class="project-image">
-              <img src="https://picsum.photos/seed/p3/800/500" alt="Project 3">
+            <div class="project-card-content">
+              <h3>AWS Cloud Infrastructure</h3>
+              <p>Designed and deployed scalable cloud infrastructure on AWS including VPC, EC2 instances, and automated
+                backup solutions.</p>
+              <div class="project-tags">
+                <span class="tag">AWS</span>
+                <span class="tag">Cloud</span>
+                <span class="tag">Automation</span>
+              </div>
             </div>
           </article>
+
+          <!-- Project Card 4 -->
+          <article class="project-card">
+            <div class="project-card-image">
+              <img src="https://picsum.photos/seed/proj4/600/400" alt="Network Security">
+            </div>
+            <div class="project-card-content">
+              <h3>Network Security Hardening</h3>
+              <p>Implemented comprehensive network security measures including firewall configuration, VPN setup, and
+                intrusion detection systems.</p>
+              <div class="project-tags">
+                <span class="tag">Networking</span>
+                <span class="tag">Firewall</span>
+                <span class="tag">VPN</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project Card 5 -->
+          <article class="project-card">
+            <div class="project-card-image">
+              <img src="https://picsum.photos/seed/proj5/600/400" alt="Automation Scripts">
+            </div>
+            <div class="project-card-content">
+              <h3>IT Automation Scripts</h3>
+              <p>Created PowerShell and Python automation scripts for system administration tasks, user provisioning,
+                and routine maintenance.</p>
+              <div class="project-tags">
+                <span class="tag">Scripting</span>
+                <span class="tag">PowerShell</span>
+                <span class="tag">Python</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project Card 6 -->
+          <article class="project-card">
+            <div class="project-card-image">
+              <img src="https://picsum.photos/seed/proj6/600/400" alt="Documentation">
+            </div>
+            <div class="project-card-content">
+              <h3>SOC Process Documentation</h3>
+              <p>Developed comprehensive documentation for SOC procedures, incident response playbooks, and security
+                best practices.</p>
+              <div class="project-tags">
+                <span class="tag">Documentation</span>
+                <span class="tag">SOC</span>
+                <span class="tag">Best Practices</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="projects-cta">
+          <a href="https://notion.so" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            View All Projects →
+          </a>
+          <p class="cta-note">Update this link to your Notion page</p>
         </div>
       </div>
     </section>
