@@ -111,7 +111,27 @@ const initAnimations = () => {
   });
 };
 
+// Project Card Click Handlers
+const initProjectCards = () => {
+  const projectCards = document.querySelectorAll('.project-card[data-notion-url]');
+  
+  projectCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Prevent navigation if clicking on a tag or other interactive element
+      if (e.target.closest('.tag') || e.target.closest('a')) {
+        return;
+      }
+      
+      const notionUrl = card.getAttribute('data-notion-url');
+      if (notionUrl && notionUrl !== 'https://notion.so') {
+        window.open(notionUrl, '_blank', 'noopener,noreferrer');
+      }
+    });
+  });
+};
+
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
+  initProjectCards();
 });
