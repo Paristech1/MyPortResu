@@ -113,7 +113,7 @@ const initAnimations = () => {
 
 // Project Card Click Handlers
 const initProjectCards = () => {
-  const projectCards = document.querySelectorAll('.project-card[data-notion-url]');
+  const projectCards = document.querySelectorAll('.project-card');
   
   projectCards.forEach(card => {
     card.addEventListener('click', (e) => {
@@ -122,6 +122,14 @@ const initProjectCards = () => {
         return;
       }
       
+      // Internal project page - navigate in same tab
+      const projectPage = card.getAttribute('data-project-page');
+      if (projectPage) {
+        window.location.href = projectPage;
+        return;
+      }
+      
+      // External URL (Notion, live site, etc.) - open in new tab
       const notionUrl = card.getAttribute('data-notion-url');
       if (notionUrl && notionUrl !== 'https://notion.so') {
         window.open(notionUrl, '_blank', 'noopener,noreferrer');
