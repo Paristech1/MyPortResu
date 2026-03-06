@@ -803,6 +803,24 @@ section {
     margin: 0;
 }
 
+.project-mockup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.project-mockup-item {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.project-mockup-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Projects CTA */
 .projects-cta {
     text-align: center;
