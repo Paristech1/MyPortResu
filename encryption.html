@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File Encryption Tool | Portfolio</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo"><a href="index.html"><span class="highlight">Paris</span>.</a></div>
+    <nav class="nav">
+      <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experience">Work</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="project-detail">
+      <div class="container">
+        <!-- Project Hero -->
+        <div class="project-detail-hero">
+          <span class="project-badge badge-cybersec">Cyber sec</span>
+          <h1 class="reveal-text">File Encryption Tool</h1>
+          <p class="reveal-text project-detail-subtitle">
+            A secure, client-side utility for AES-256 file encryption and decryption, prioritizing user privacy and data integrity.
+          </p>
+          <div class="project-detail-cover">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=600&fit=crop&q=80" alt="File Encryption Tool - Secure Data Protection">
+          </div>
+        </div>
+
+        <!-- Overview -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Overview</h2>
+          <p class="project-detail-text">
+            This project provides a robust solution for securing digital assets. Built with the Web Crypto API, it enables high-speed, local-only encryption. No files are ever uploaded to a server—all processing happens directly in the user's browser, ensuring maximum privacy and preventing data leaks.
+          </p>
+        </div>
+
+        <!-- Key Features -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Key Features</h2>
+          <div class="project-mockup-grid">
+            <div class="project-mockup-item">
+              <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop&q=80" alt="Encryption Dashboard - Drag and Drop Files">
+            </div>
+            <div class="project-mockup-item">
+              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop&q=80" alt="Encryption Process - Progress Indicator">
+            </div>
+            <div class="project-mockup-item">
+              <img src="https://images.unsplash.com/photo-1510511459019-5dee995d326c?w=600&h=400&fit=crop&q=80" alt="Decryption - Password Protected Access">
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Deep Dive -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Technical Implementation</h2>
+          <div class="project-detail-placeholder">
+            <p>Utilizing the Advanced Encryption Standard (AES) in Galois/Counter Mode (GCM) for both confidentiality and authenticity. PBKDF2 is employed for secure key derivation from user-provided passwords.</p>
+          </div>
+        </div>
+
+        <!-- Back to Projects -->
+        <div class="projects-cta">
+          <a href="projects.html" class="btn-primary">
+            ← Back to Projects
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

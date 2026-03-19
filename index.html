@@ -273,9 +273,46 @@
           </p>
         </div>
 
+        <!-- Project Filter Dropdown -->
+        <div class="projects-filter">
+          <div class="dropdown">
+            <div class="dropdown-select">
+              <span class="selected">All Projects</span>
+              <svg class="dropdown-caret" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item active" data-filter="all">All Projects</li>
+              <li class="dropdown-item" data-filter="cybersec">Cybersecurity</li>
+              <li class="dropdown-item" data-filter="infrastructure">Infrastructure</li>
+              <li class="dropdown-item" data-filter="web">Web Development</li>
+              <li class="dropdown-item" data-filter="automation">Automation</li>
+              <li class="dropdown-item" data-filter="docs">Documentation</li>
+            </ul>
+          </div>
+        </div>
+
         <div class="project-grid">
-          <!-- Project Card - md5 Checksum -->
-          <article class="project-card" data-notion-url="https://www.notion.so/MD5-Checksum-project-31e109e88561803bb481dab947cc9244#31e109e8856180dba1dcf02cbe506bf6">
+          <!-- Project Card - File Encryption Tool -->
+          <article class="project-card" data-project-page="encryption.html" data-category="cybersec">
+            <div class="project-card-image">
+              <span class="project-badge badge-cybersec">Cyber sec</span>
+              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop&q=80" alt="File Encryption Tool - Secure Data Protection">
+            </div>
+            <div class="project-card-content">
+              <h3>File Encryption Tool</h3>
+              <p>A high-performance, client-side encryption utility utilizing AES-256 GCM. This tool ensures that sensitive files are protected with industry-standard cryptography without ever leaving the user's device, providing a seamless and secure experience for digital privacy.</p>
+              <div class="project-tags">
+                <span class="tag">Cybersecurity</span>
+                <span class="tag">Cryptography</span>
+                <span class="tag">AES-256</span>
+                <span class="tag">Web Crypto</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-notion-url="https://www.notion.so/MD5-Checksum-project-31e109e88561803bb481dab947cc9244#31e109e8856180dba1dcf02cbe506bf6" data-category="cybersec">
             <div class="project-card-image">
               <span class="project-badge badge-cybersec">Cyber sec</span>
               <img src="/src/assets/md5-checksum-thumbnail.png" alt="MD5 Checksum - Secure File Verification">
@@ -293,7 +330,7 @@
           </article>
 
           <!-- Project Card 1 - Kali-Linux Social Engineering Lab -->
-          <article class="project-card" data-notion-url="https://www.notion.so/Cloud-Based-Social-Engineering-Lab-Credential-Harvesting-Detection-Prevention-Training-AWS-Kal-2d2109e8856180f4ba2cc276c413c89d?source=copy_link">
+          <article class="project-card" data-notion-url="https://www.notion.so/Cloud-Based-Social-Engineering-Lab-Credential-Harvesting-Detection-Prevention-Training-AWS-Kal-2d2109e8856180f4ba2cc276c413c89d?source=copy_link" data-category="cybersec infrastructure">
             <div class="project-card-image">
               <span class="project-badge badge-cybersec">Cyber sec</span>
               <img src="/src/assets/kali-linux-logo.svg" alt="Kali Linux Logo - Social Engineering Lab">
@@ -312,7 +349,7 @@
           </article>
 
           <!-- Project Card 2 - PhilaBag Nonprofit Website -->
-          <article class="project-card" data-notion-url="https://www.philabag.org">
+          <article class="project-card" data-notion-url="https://www.philabag.org" data-category="web">
             <div class="project-card-image">
               <span class="project-badge badge-live">LIVE</span>
               <img src="/src/assets/philabag-thumbnail.png" alt="PhilaBag Nonprofit Website - Impactful Hero">
@@ -331,7 +368,7 @@
           </article>
 
           <!-- Project Card 3 - NBA Showdown -->
-          <article class="project-card" data-project-page="nba-showdown.html">
+          <article class="project-card" data-project-page="nba-showdown.html" data-category="web">
             <div class="project-card-image">
               <span class="project-badge badge-personal">PERSONAL</span>
               <img src="/src/assets/nba-showdown-cover.png" alt="NBA Showdown - Daily Performance Comparison App">
@@ -346,7 +383,7 @@
           </article>
 
           <!-- Project Card 4 - Home Lab -->
-          <article class="project-card" data-notion-url="https://notion.so">
+          <article class="project-card" data-notion-url="https://notion.so" data-category="infrastructure">
             <div class="project-card-image">
               <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop&q=80" alt="Home Lab Setup - Server Infrastructure">
             </div>
@@ -363,7 +400,7 @@
           </article>
 
           <!-- Project Card 3 -->
-          <article class="project-card" data-notion-url="https://notion.so">
+          <article class="project-card" data-notion-url="https://notion.so" data-category="infrastructure cybersec">
             <div class="project-card-image">
               <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop&q=80" alt="SIEM Dashboard - Security Monitoring">
             </div>
@@ -380,7 +417,7 @@
           </article>
 
           <!-- Project Card 4 -->
-          <article class="project-card" data-notion-url="https://notion.so">
+          <article class="project-card" data-notion-url="https://notion.so" data-category="infrastructure">
             <div class="project-card-image">
               <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&q=80" alt="AWS Cloud Infrastructure">
             </div>
@@ -397,7 +434,7 @@
           </article>
 
           <!-- Project Card 5 -->
-          <article class="project-card" data-notion-url="https://notion.so">
+          <article class="project-card" data-notion-url="https://notion.so" data-category="infrastructure cybersec">
             <div class="project-card-image">
               <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop&q=80" alt="Network Security - Firewall">
             </div>
@@ -414,7 +451,7 @@
           </article>
 
           <!-- Project Card 6 -->
-          <article class="project-card" data-notion-url="https://notion.so">
+          <article class="project-card" data-notion-url="https://notion.so" data-category="automation">
             <div class="project-card-image">
               <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop&q=80" alt="IT Automation Scripts - Code">
             </div>
@@ -431,7 +468,7 @@
           </article>
 
           <!-- Project Card 7 -->
-          <article class="project-card" data-notion-url="https://notion.so">
+          <article class="project-card" data-notion-url="https://notion.so" data-category="docs">
             <div class="project-card-image">
               <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&q=80" alt="SOC Process Documentation">
             </div>

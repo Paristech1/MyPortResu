@@ -138,8 +138,84 @@ const initProjectCards = () => {
   });
 };
 
+// Project Categorization & Filtering
+const initProjectFiltering = () => {
+  const dropdown = document.querySelector('.dropdown');
+  if (!dropdown) return;
+
+  const select = dropdown.querySelector('.dropdown-select');
+  const caret = dropdown.querySelector('.dropdown-caret');
+  const menu = dropdown.querySelector('.dropdown-menu');
+  const options = dropdown.querySelectorAll('.dropdown-item');
+  const selected = dropdown.querySelector('.selected');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  // Toggle dropdown
+  select.addEventListener('click', () => {
+    dropdown.classList.toggle('open');
+  });
+
+  // Handle outside click to close dropdown
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('open');
+    }
+  });
+
+  // Filter projects logic
+  options.forEach(option => {
+    option.addEventListener('click', () => {
+      const filter = option.getAttribute('data-filter');
+      
+      // Update UI
+      selected.innerText = option.innerText;
+      dropdown.classList.remove('open');
+      options.forEach(o => o.classList.remove('active'));
+      option.classList.add('active');
+
+      // Filter and animate cards
+      filterProjects(filter, projectCards);
+    });
+  });
+};
+
+const filterProjects = (filter, cards) => {
+  cards.forEach(card => {
+    const categories = card.getAttribute('data-category')?.split(' ') || [];
+    
+    // Check if category matches filter
+    const isVisible = filter === 'all' || categories.includes(filter);
+
+    if (isVisible) {
+      // Show card with animation
+      gsap.to(card, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        display: 'block',
+        ease: 'power2.out'
+      });
+    } else {
+      // Hide card with animation
+      gsap.to(card, {
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.3,
+        display: 'none',
+        ease: 'power2.in'
+      });
+    }
+  });
+
+  // Refresh ScrollTrigger after layout change
+  setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 400);
+};
+
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
   initProjectCards();
+  initProjectFiltering();
 });
