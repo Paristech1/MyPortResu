@@ -959,26 +959,21 @@ section {
 /* Responsive - Projects */
 @media (max-width: 768px) {
     .logo--desktop-only {
-        display: none !important;
-    }
-
-    .logo--mobile-only {
         display: block;
     }
 
+    .logo--mobile-only {
+        display: none;
+    }
+
     .header {
-        justify-content: flex-end;
+        justify-content: space-between;
         transform: translateZ(0);
         -webkit-transform: translateZ(0);
     }
 
     .logo--scroll {
-        width: fit-content;
-        margin-bottom: var(--spacing-md);
-        mix-blend-mode: difference;
-        color: white;
-        position: relative;
-        z-index: 1;
+        display: none;
     }
 
     .projects-page {
