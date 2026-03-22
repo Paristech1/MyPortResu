@@ -8,6 +8,35 @@ import '@fontsource/public-sans';
 // Register GSAP ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
+const initMobileBrandFade = () => {
+  const scrollLogo = document.querySelector('.logo--scroll');
+  const experience = document.querySelector('#experience');
+  if (!scrollLogo || !experience) return;
+
+  const mm = gsap.matchMedia();
+
+  mm.add('(max-width: 768px)', () => {
+    gsap.set(scrollLogo, { opacity: 1 });
+
+    const tween = gsap.to(scrollLogo, {
+      opacity: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: experience,
+        start: 'top 28%',
+        end: 'top 8%',
+        scrub: true,
+      },
+    });
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+      gsap.set(scrollLogo, { clearProps: 'opacity' });
+    };
+  });
+};
+
 // Initialize Lenis Smooth Scroll
 const lenis = new Lenis({
   duration: 1.2,
@@ -215,6 +244,7 @@ const filterProjects = (filter, cards) => {
 
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', () => {
+  initMobileBrandFade();
   initAnimations();
   initProjectCards();
   initProjectFiltering();
