@@ -13,17 +13,32 @@ const initBrandFade = () => {
   const hero = document.querySelector('.hero');
   if (!headerLogo || !hero) return;
 
-  gsap.set(headerLogo, { opacity: 1 });
+  const mm = gsap.matchMedia();
 
-  gsap.to(headerLogo, {
-    opacity: 0,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: hero,
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true,
-    },
+  // Desktop: fade header mark while leaving hero. Mobile: keep header visually static (no scroll-driven fade).
+  mm.add('(min-width: 769px)', () => {
+    gsap.set(headerLogo, { opacity: 1 });
+
+    const tween = gsap.to(headerLogo, {
+      opacity: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: hero,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    });
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+      gsap.set(headerLogo, { clearProps: 'opacity' });
+    };
+  });
+
+  mm.add('(max-width: 768px)', () => {
+    gsap.set(headerLogo, { opacity: 1 });
   });
 };
 

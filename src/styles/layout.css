@@ -970,6 +970,38 @@ section {
         justify-content: space-between;
         transform: translateZ(0);
         -webkit-transform: translateZ(0);
+        /* Tighter horizontal padding + room on the right so nav is not clipped by overflow-x */
+        padding-inline: clamp(0.5rem, 2.5vw, 1rem) clamp(0.625rem, 2vw, 1rem);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    .header .logo.logo--header {
+        font-size: clamp(1rem, 4.2vw, 1.35rem);
+        flex-shrink: 0;
+    }
+
+    /* Nudge nav left so “Contact” clears the viewport edge */
+    .nav {
+        transform: translateX(-0.4rem);
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        overflow: visible;
+    }
+
+    .nav ul {
+        gap: clamp(0.35rem, 2vw, 0.65rem);
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+    }
+
+    .nav a {
+        font-size: clamp(0.65rem, 2.6vw, 0.82rem);
+        letter-spacing: 0.035em;
     }
 
     .logo--scroll {
