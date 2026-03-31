@@ -1,0 +1,137 @@
+<section class="module" id="module-4">
+  <div class="module-header">
+    <div class="module-eyebrow">Module 04</div>
+    <h2 class="module-title">The User Interface</h2>
+  </div>
+
+  <div class="module-content">
+    <p>We've fetched the data, calculated the scores, and played the game. But a game only feels premium if it reacts magically to your touch. That's the power of the frontend interface.</p>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">✨</div>
+      <div class="callout-content">
+        <strong class="callout-title">Juice</strong>
+        <p>In game design, "juice" is the magical feeling of a button snapping, screen shaking, or card sliding in gracefully. In NBA Showdown, we add juice using a library called <span class="term" data-definition="A powerful animation library for React that makes elements smoothly transition between states instead of teleporting.">Framer Motion</span>.</p>
+      </div>
+    </div>
+
+    <h3>Buttery Smooth Cards</h3>
+    <p>Look at how the player cards slide into the arena. Instead of instantly teleporting (which feels cheap), they fade in and drift upwards. Let's look at the actual code that orchestrates this dance.</p>
+
+    <div class="translation-block animate-in">
+      <div class="translation-code">
+        <span class="translation-label">CODE</span>
+        <pre><code><span class="code-line">&lt;<span class="code-keyword">motion.div</span></span>
+<span class="code-line">  <span class="code-property">initial</span>={{ opacity: 0, y: 40, scale: 0.95 }}</span>
+<span class="code-line">  <span class="code-property">animate</span>={{ opacity: 1, y: 0, scale: 1 }}</span>
+<span class="code-line">  <span class="code-property">exit</span>={{ opacity: 0, y: -40, scale: 0.95 }}</span>
+<span class="code-line">  <span class="code-property">whileHover</span>={{ scale: 1.02 }}</span>
+<span class="code-line">  <span class="code-property">whileTap</span>={{ scale: 0.98 }}</span>
+<span class="code-line">  <span class="code-property">transition</span>={{ <span class="code-property">duration</span>: 0.28 }}</span>
+<span class="code-line">&gt;</span></code></pre>
+      </div>
+      <div class="translation-english">
+        <span class="translation-label">PLAIN ENGLISH</span>
+        <div class="translation-lines">
+          <p class="tl">Create a magic box container for our player card...</p>
+          <p class="tl">Before it loads, set it to be invisible, shifted downwards 40 pixels, and slightly shrunk.</p>
+          <p class="tl">When it enters the screen, smoothly fade into reality at its normal size and zero offset.</p>
+          <p class="tl">When it loses the round, neatly drift upwards and fade out completely.</p>
+          <p class="tl">If the user hovers their mouse over it, pop out slightly (1.02x).</p>
+          <p class="tl">When they click, dramatically compress the card inwards (0.98x).</p>
+          <p class="tl">Make all these fluid animations last exactly 0.28 seconds.</p>
+          <p class="tl">End of the magic box declaration.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Building the Layers</h3>
+    <p>Modern web development is built like a sandwich. An unstyled site is just bones. Add CSS to give it skin. Add Javascript to give it muscles.</p>
+
+    <div class="layer-demo" style="margin-top: 2rem;">
+      <div class="layer-tabs">
+        <button class="layer-tab active" onclick="showLayer('html')">HTML</button>
+        <button class="layer-tab" onclick="showLayer('css')">+ CSS</button>
+        <button class="layer-tab" onclick="showLayer('js')">+ JS</button>
+      </div>
+      <div class="layer-viewport" style="background:#fff; min-height: 200px; padding: 20px; border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+        <div class="layer" id="layer-html" style="display:block;">
+          <div><img src="https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg" alt="Lakers" width="40"><br><strong>LeBron James</strong><br><span>25 PTS • 7 REB • 7 AST</span></div>
+        </div>
+        <div class="layer" id="layer-css" style="display:none; text-align: center;">
+          <div style="background: #111; color: white; display: inline-block; padding: 20px; border-radius: 20px; border: 2px solid #555; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <img src="https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg" alt="Lakers" width="60" style="margin-bottom: 15px;"><br>
+            <strong style="font-size: 1.5rem;">LeBron James</strong><br>
+            <span style="color: #aaa;">25 PTS • 7 REB • 7 AST</span>
+          </div>
+        </div>
+        <div class="layer" id="layer-js" style="display:none; text-align: center;">
+          <div style="background: #111; color: white; display: inline-block; padding: 20px; border-radius: 20px; border: 2px solid #D94F30; box-shadow: 0 10px 40px rgba(217,79,48,0.3); transform: scale(1.05); transition: all 0.3s; cursor: pointer;">
+            <img src="https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg" alt="Lakers" width="60" style="margin-bottom: 15px;"><br>
+            <strong style="font-size: 1.5rem;">LeBron James</strong><br>
+            <span style="color: #aaa;">25 PTS • 7 REB • 7 AST</span>
+            <div style="margin-top:20px; background: #D94F30; color: white; padding: 10px; border-radius: 5px; font-weight: bold;">Select Player 🏀</div>
+          </div>
+        </div>
+      </div>
+      <p class="layer-description" id="layer-desc" style="margin-top:1rem; font-weight: 500;">This is the raw data (bones). Just structural facts.</p>
+    </div>
+    
+    <script>
+    window.showLayer = function(layer) {
+      document.querySelectorAll('.layer-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.layer').forEach(l => l.style.display = 'none');
+      document.getElementById('layer-'+layer).style.display = 'block';
+      
+      const desc = document.getElementById('layer-desc');
+      if (layer === 'html') desc.textContent = "This is the raw data (bones). Just structural HTML facts with zero design.";
+      if (layer === 'css') desc.textContent = "CSS adds the glassmorphism, rounded corners, drop shadows, and visual layout.";
+      if (layer === 'js') desc.textContent = "Javascript adds the interactive glow, the hover zoom effects, and the 'Select Player' interactive logic!";
+    }
+    </script>
+
+    <div class="bug-challenge" style="margin-top: 3rem;">
+      <h3>Find the bug in this code:</h3>
+      <div class="bug-code">
+        <div class="bug-line" data-line="1" onclick="checkBugLine(this, false)">
+          <span class="line-num">1</span>
+          <code>&lt;motion.div</code>
+        </div>
+        <div class="bug-line bug-target" data-line="2" onclick="checkBugLine(this, true)">
+          <span class="line-num">2</span>
+          <code>  initial={{ opacity: 1, y: 0 }}</code>
+        </div>
+        <div class="bug-line" data-line="3" onclick="checkBugLine(this, false)">
+          <span class="line-num">3</span>
+          <code>  animate={{ opacity: 1, y: 0 }}</code>
+        </div>
+        <div class="bug-line" data-line="4" onclick="checkBugLine(this, false)">
+          <span class="line-num">4</span>
+          <code>  exit={{ opacity: 0, y: -40 }}</code>
+        </div>
+        <div class="bug-line" data-line="5" onclick="checkBugLine(this, false)">
+          <span class="line-num">5</span>
+          <code>&gt;</code>
+        </div>
+      </div>
+      <div class="bug-feedback" id="bug-feedback"></div>
+    </div>
+    <script>
+    window.checkBugLine = function(el, isCorrect) {
+      const feedback = el.closest('.bug-challenge').querySelector('.bug-feedback');
+      if (isCorrect) {
+        el.classList.add('correct');
+        feedback.innerHTML = '<strong>Found it!</strong> If the initial state matches the animate state (`opacity: 1`), there is no animation journey to travel! The element will literally just teleport onto the screen instantly instead of fading in. Fix: `initial={{ opacity: 0, y: 40 }}`.';
+        feedback.className = 'bug-feedback show success';
+      } else {
+        el.classList.add('incorrect');
+        feedback.innerHTML = 'Not this line — think about what happens when the starting state matches the destination state!';
+        feedback.className = 'bug-feedback show error';
+        setTimeout(() => { el.classList.remove('incorrect'); feedback.className = 'bug-feedback'; }, 4000);
+      }
+    };
+    </script>
+
+  </div>
+</section>

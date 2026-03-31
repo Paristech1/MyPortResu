@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBA Showdown Course</title>
+
+  <!-- Google Fonts: Bricolage Grotesque · DM Sans · JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    :root {
+      --color-accent:       #E06B56;
+      --color-accent-hover: #C85A47;
+      --color-accent-light: #FDECEA;
+      --color-accent-muted: #E89585;
+    }
+  </style>
+
+  <script src="main.js" defer></script>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="nav-inner">
+      <span class="nav-title">NBA Showdown Course</span>
+      <div class="nav-dots" id="nav-dots" role="tablist">
+        <button class="nav-dot" data-target="module-1" data-tooltip="The Core Loop" role="tab" aria-label="Module 1: The Core Loop"></button>
+        <button class="nav-dot" data-target="module-2" data-tooltip="Behind the Scenes" role="tab" aria-label="Module 2: Behind the Scenes"></button>
+        <button class="nav-dot" data-target="module-3" data-tooltip="The Algorithm" role="tab" aria-label="Module 3: The Algorithm"></button>
+        <button class="nav-dot" data-target="module-4" data-tooltip="The User Interface" role="tab" aria-label="Module 4: The User Interface"></button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- modules/*.html content is assembled here by build.sh -->
+<section class="module" id="module-1">
+  <div class="module-header">
+    <div class="module-eyebrow">Module 01</div>
+    <h2 class="module-title">The Core Loop</h2>
+  </div>
+
+  <div class="module-content">
+    <p>Imagine you're arguing with your friends about which NBA player had the best night. Instead of just looking at a boring spreadsheet, <strong>NBA Showdown</strong> turns it into a game. Two players appear on screen. You pick the best one. The winner stays; the loser goes home. You keep picking until only one <span class="term" data-definition="A champion who outlasted everyone else in the showdown bracket.">Baller of the Night</span> remains.</p>
+
+    <div class="callout callout-accent">
+      <div class="callout-icon">💡</div>
+      <div class="callout-content">
+        <strong class="callout-title">The "Hot or Not" Pattern</strong>
+        <p>This is a classic software pattern: taking a complex dataset (dozens of players with multiple stats) and reducing it to a series of simple, binary choices. It lowers the cognitive load for the user.</p>
+      </div>
+    </div>
+
+    <h3>What happens when you click?</h3>
+    <p>Every time you pick a player, the app runs a specific <span class="term" data-definition="A self-contained block of code designed to do one specific job.">function</span> to handle the match. Let's trace the journey of your click into the code.</p>
+
+    <div class="translation-block animate-in">
+      <div class="translation-code">
+        <span class="translation-label">CODE</span>
+        <pre><code><span class="code-line"><span class="code-keyword">function</span> <span class="code-function">handlePick</span>(side) {</span>
+<span class="code-line">  <span class="code-keyword">const</span> selected = side === <span class="code-string">'left'</span> ? leftPlayer : rightPlayer;</span>
+<span class="code-line">  <span class="code-keyword">const</span> eliminated = side === <span class="code-string">'left'</span> ? rightPlayer : leftPlayer;</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-keyword">if</span> (deck.length < 1) {</span>
+<span class="code-line">    <span class="code-function">setWinner</span>(selected);</span>
+<span class="code-line">    <span class="code-keyword">return</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-keyword">const</span> updatedDeck = [...deck, selected];</span>
+<span class="code-line">  <span class="code-keyword">const</span> shuffledDeck = updatedDeck.<span class="code-function">sort</span>(() => 0.5 - Math.<span class="code-function">random</span>());</span>
+<span class="code-line">}</span></code></pre>
+      </div>
+      <div class="translation-english">
+        <span class="translation-label">PLAIN ENGLISH</span>
+        <div class="translation-lines">
+          <p class="tl">When a user clicks a card, start the match resolution.</p>
+          <p class="tl">Figure out who they picked based on the side they clicked.</p>
+          <p class="tl">Figure out who lost (the other guy).</p>
+          <p class="tl"><br/></p>
+          <p class="tl">If there's nobody left in the deck to play...</p>
+          <p class="tl">Crown the current selected player as the overall winner!</p>
+          <p class="tl">Stop here.</p>
+          <p class="tl"><br/></p>
+          <p class="tl">Otherwise, throw the winner back into the pool of players.</p>
+          <p class="tl">Shuffle the deck so the next match is random.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>This creates an endless loop of matchups until the `deck` (our remaining player pool) is completely empty.</p>
+
+    <h3>Tracing the Elimination</h3>
+    <p>Let's map out exactly how players move through the system when you make a choice.</p>
+
+    <div class="flow-animation" data-steps='[
+      {"highlight":"flow-actor-1","label":"You click the LeBron James card"},
+      {"highlight":"flow-actor-2","label":"The handlePick function runs","packet":true,"from":"actor-1","to":"actor-2"},
+      {"highlight":"flow-actor-3","label":"LeBron is added to the updatedDeck array","packet":true,"from":"actor-2","to":"actor-3"},
+      {"highlight":"flow-actor-4","label":"The loser is discarded completely","packet":true,"from":"actor-2","to":"actor-4"}
+    ]'>
+      <div class="flow-actors">
+        <div class="flow-actor" id="flow-actor-1">
+          <div class="flow-actor-icon">👆</div>
+          <span>User Click</span>
+        </div>
+        <div class="flow-actor" id="flow-actor-2">
+          <div class="flow-actor-icon">⚙️</div>
+          <span>handlePick</span>
+        </div>
+        <div class="flow-actor" id="flow-actor-3">
+          <div class="flow-actor-icon">📥</div>
+          <span>Deck Array</span>
+        </div>
+        <div class="flow-actor" id="flow-actor-4">
+          <div class="flow-actor-icon">🗑️</div>
+          <span>Trash</span>
+        </div>
+      </div>
+      <div class="flow-packet" id="flow-packet"></div>
+      <div class="flow-step-label" id="flow-label">Click "Next Step" to begin</div>
+      <div class="flow-controls">
+        <button class="btn flow-next-btn">Next Step</button>
+        <button class="btn flow-reset-btn">Restart</button>
+        <span class="flow-progress"></span>
+      </div>
+    </div>
+
+    <div class="quiz-container" id="quiz-module1">
+      <div class="quiz-question-block"
+           data-correct="option-b"
+           data-explanation-right="Exactly! Adding them to the deck array means they stay in the game and will eventually be drawn again for another matchup."
+           data-explanation-wrong="Not quite. In this game, winning just means you survive to fight another round. Think about where the code places the selected player.">
+        <h3 class="quiz-question">When a player wins a matchup and the deck isn't empty, what happens to them?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="option-a" onclick="selectOption(this)">
+            <div class="quiz-option-radio"></div>
+            <span>They instantly become the Baller of the Night.</span>
+          </button>
+          <button class="quiz-option" data-value="option-b" onclick="selectOption(this)">
+            <div class="quiz-option-radio"></div>
+            <span>They are thrown back into the random deck to fight again later.</span>
+          </button>
+          <button class="quiz-option" data-value="option-c" onclick="selectOption(this)">
+            <div class="quiz-option-radio"></div>
+            <span>They sit in a special "Winners Circle" list until the end.</span>
+          </button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <button class="quiz-check-btn" onclick="checkQuiz('quiz-module1')">Check Answers</button>
+      <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module1')">Try Again</button>
+    </div>
+
+  </div>
+</section>
+<section class="module" id="module-2">
+  <div class="module-header">
+    <div class="module-eyebrow">Module 02</div>
+    <h2 class="module-title">Behind the Scenes</h2>
+  </div>
+
+  <div class="module-content">
+    <p>We know how the showdown works on screen, but where do the players come from? They don't live in our code. Instead, we have to go out and fetch the raw box scores from the real world.</p>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">🌐</div>
+      <div class="callout-content">
+        <strong class="callout-title">The Three-Tier System</strong>
+        <p>Our app consists of a frontend (the interface you click on), a backend (our Python brain that shapes the data), and a third-party <span class="term" data-definition="Application Programming Interface. A set of rules that allows two applications to talk to each other. Like a waiter taking your order to the kitchen.">API</span> (the official NBA data servers). They have to work together perfectly.</p>
+      </div>
+    </div>
+
+    <h3>The Relay Race</h3>
+    <p>When you start a fresh game, your browser doesn't talk directly to the NBA. It talks to our backend server, which acts like a specialized courier.</p>
+
+    <div class="chat-window" id="chat-module2">
+      <div class="chat-messages">
+        <div class="chat-message" data-msg="0" data-sender="actor-a" style="display:none">
+          <div class="chat-avatar" style="background: var(--color-actor-1)">F</div>
+          <div class="chat-bubble">
+            <span class="chat-sender" style="color: var(--color-actor-1)">Frontend</span>
+            <p>Hey Backend! The user wants to play. Can you get today's matchups?</p>
+          </div>
+        </div>
+        <div class="chat-message" data-msg="1" data-sender="actor-b" style="display:none">
+          <div class="chat-avatar" style="background: var(--color-actor-2)">B</div>
+          <div class="chat-bubble">
+            <span class="chat-sender" style="color: var(--color-actor-2)">Backend</span>
+            <p>On it. NBA API, what games happened today?</p>
+          </div>
+        </div>
+        <div class="chat-message" data-msg="2" data-sender="actor-c" style="display:none">
+          <div class="chat-avatar" style="background: var(--color-actor-3)">N</div>
+          <div class="chat-bubble">
+            <span class="chat-sender" style="color: var(--color-actor-3)">NBA API</span>
+            <p>Here you go: Lakers vs Celtics, Heat vs Knicks...</p>
+          </div>
+        </div>
+        <div class="chat-message" data-msg="3" data-sender="actor-b" style="display:none">
+          <div class="chat-avatar" style="background: var(--color-actor-2)">B</div>
+          <div class="chat-bubble">
+            <span class="chat-sender" style="color: var(--color-actor-2)">Backend</span>
+            <p>Awesome. Give me the box scores for ALL of those games immediately!</p>
+          </div>
+        </div>
+        <div class="chat-message" data-msg="4" data-sender="actor-b" style="display:none">
+          <div class="chat-avatar" style="background: var(--color-actor-2)">B</div>
+          <div class="chat-bubble">
+            <span class="chat-sender" style="color: var(--color-actor-2)">Backend</span>
+            <p>Alright Frontend, scored 'em all up. Here's your final daily deck of players.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-typing" id="chat-module2-typing" style="display:none">
+        <div class="chat-avatar" id="chat-module2-typing-avatar">?</div>
+        <div class="chat-typing-dots">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+      </div>
+
+      <div class="chat-controls">
+        <button class="btn chat-next-btn">Next Message</button>
+        <button class="btn chat-all-btn">Play All</button>
+        <button class="btn chat-reset-btn">Replay</button>
+        <span class="chat-progress"></span>
+      </div>
+    </div>
+
+    <h3>The Need for Speed</h3>
+    <p>On an average night, there might be 10 NBA games playing. If the backend asked the NBA for Game 1's boxscore, waited for the reply, then asked for Game 2, and so on, you would be staring at a loading spinner forever. It's like a supermarket only having one checkout line open.</p>
+
+    <p>To fix this, the backend uses <span class="term" data-definition="Doing multiple things at exactly the same time.">concurrency</span>. It asks for all the games simultaneously by spawning "workers", like opening 5 checkout lanes at once.</p>
+
+    <div class="translation-block animate-in">
+      <div class="translation-code">
+        <span class="translation-label">CODE</span>
+        <pre><code><span class="code-line"><span class="code-keyword">with</span> <span class="code-function">ThreadPoolExecutor</span>(<span class="code-property">max_workers</span>=5) <span class="code-keyword">as</span> executor:</span>
+<span class="code-line">    futures = {executor.<span class="code-function">submit</span>(_fetch_box_score, gid): gid <span class="code-keyword">for</span> gid <span class="code-keyword">in</span> game_ids}</span>
+<span class="code-line">    <span class="code-keyword">for</span> future <span class="code-keyword">in</span> <span class="code-function">as_completed</span>(futures):</span>
+<span class="code-line">        <span class="code-keyword">try</span>:</span>
+<span class="code-line">            player_pool.<span class="code-function">extend</span>(future.<span class="code-function">result</span>())</span>
+<span class="code-line">        <span class="code-keyword">except</span> Exception <span class="code-keyword">as</span> e:</span>
+<span class="code-line">            <span class="code-function">print</span>(<span class="code-string">f"Error in thread for {futures[future]}: {e}"</span>)</span></code></pre>
+      </div>
+      <div class="translation-english">
+        <span class="translation-label">PLAIN ENGLISH</span>
+        <div class="translation-lines">
+          <p class="tl">Spin up a pool of 5 workers who can fetch requests simultaneously.</p>
+          <p class="tl">Give each worker an assignment: "Go fetch the box score for a specific game ID!"</p>
+          <p class="tl">As soon as *any* worker returns from the NBA with their results...</p>
+          <p class="tl"><br/></p>
+          <p class="tl">Take the players they found and dump them into our giant pool of players.</p>
+          <p class="tl">But if a worker crashes or gets an error instead...</p>
+          <p class="tl">Safely ignore that broken game so the rest of the app doesn't crash!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-block">
+      <div class="scenario-context">
+        <span class="scenario-label">Scenario</span>
+        <p>A user emails you complaining that on Saturdays (when there are sometimes 15+ games), the "Loading today's matchups" spinner takes 12 seconds instead of 4 seconds. What is the most likely strategy to speed this up?</p>
+      </div>
+      <div class="quiz-container" id="quiz-scenario2">
+        <div class="quiz-question-block"
+             data-correct="option-b"
+             data-explanation-right="Nailed it! 5 workers handling 15 requests takes 3 sequential rounds of fetching. Bumping the workers opens more lanes and fetches the jobs faster."
+             data-explanation-wrong="Not quite. That might help a tiny bit, but the fundamental bottleneck here is concurrency: we have too few workers juggling too many game requests.">
+          <div class="quiz-options">
+            <button class="quiz-option" data-value="option-a" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>Switch to a completely different database on the backend.</span>
+            </button>
+            <button class="quiz-option" data-value="option-b" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>Increase `max_workers` from 5 to 15 so all game boxscores can be fetched simultaneously.</span>
+            </button>
+            <button class="quiz-option" data-value="option-c" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>Require users to refresh their browser harder to fetch data sooner.</span>
+            </button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <button class="quiz-check-btn" onclick="checkQuiz('quiz-scenario2')">Check Answers</button>
+        <button class="quiz-reset-btn" onclick="resetQuiz('quiz-scenario2')">Try Again</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="module" id="module-3">
+  <div class="module-header">
+    <div class="module-eyebrow">Module 03</div>
+    <h2 class="module-title">The Algorithm</h2>
+  </div>
+
+  <div class="module-content">
+    <p>NBA Showdown leaves the final decision up to you, but to help you decide, the app provides a "Game Score" number for everyone.</p>
+
+    <div class="callout callout-accent">
+      <div class="callout-icon">📊</div>
+      <div class="callout-content">
+        <strong class="callout-title">Composite Metrics</strong>
+        <p>A "composite metric" is a software engineering technique where you merge many variables (Points, Assists, Rebounds) into one single, powerful number. It gives the user an instant, at-a-glance summary instead of making them compare six individual numbers themselves.</p>
+      </div>
+    </div>
+
+    <h3>The Formula Under the Hood</h3>
+    <p>Look at the specific <span class="term" data-definition="A reusable piece of logic that does math or runs calculations for you inside your program.">function</span> in the backend that calculates the Game Score.</p>
+
+    <div class="translation-block animate-in">
+      <div class="translation-code">
+        <span class="translation-label">CODE</span>
+        <pre><code><span class="code-line"><span class="code-keyword">def</span> <span class="code-function">_game_score</span>(p):</span>
+<span class="code-line">    <span class="code-keyword">return</span> (</span>
+<span class="code-line">        p[<span class="code-string">"PTS"</span>] + p[<span class="code-string">"REB"</span>] * 1.2 + p[<span class="code-string">"AST"</span>] * 1.5</span>
+<span class="code-line">        + p.<span class="code-function">get</span>(<span class="code-string">"STL"</span>, 0) * 2 + p.<span class="code-function">get</span>(<span class="code-string">"BLK"</span>, 0) * 2</span>
+<span class="code-line">        - p.<span class="code-function">get</span>(<span class="code-string">"TOV"</span>, 0) * 1.5</span>
+<span class="code-line">    )</span></code></pre>
+      </div>
+      <div class="translation-english">
+        <span class="translation-label">PLAIN ENGLISH</span>
+        <div class="translation-lines">
+          <p class="tl">To calculate the game score of player "p"...</p>
+          <p class="tl">Let's tally up the math!</p>
+          <p class="tl">Give 1 point per basket, 1.2 points per rebound, 1.5 per assist.</p>
+          <p class="tl">Give an extra 2 points for every steal or block (defensive bonuses!).</p>
+          <p class="tl">Subtract 1.5 points for every turnover (mistakes matter!).</p>
+          <p class="tl">Add it all up and return the result as the single Game Score number.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Matching the Weights</h3>
+    <p>Let's see if you can remember the math. Drag each stat line to the correct weight from the code above.</p>
+
+    <div class="dnd-container" id="dnd-module3">
+      <div class="dnd-chips">
+        <div class="dnd-chip" draggable="true" data-answer="pts">Points (PTS)</div>
+        <div class="dnd-chip" draggable="true" data-answer="reb">Rebounds (REB)</div>
+        <div class="dnd-chip" draggable="true" data-answer="ast">Assists (AST)</div>
+        <div class="dnd-chip" draggable="true" data-answer="def">Steals/Blocks</div>
+        <div class="dnd-chip" draggable="true" data-answer="tov">Turnovers (TOV)</div>
+      </div>
+      <div class="dnd-zones">
+        <div class="dnd-zone" data-correct="def">
+          <p class="dnd-zone-label">Gets a 2.0x bonus multiplier</p>
+          <div class="dnd-zone-target">Drop here</div>
+        </div>
+        <div class="dnd-zone" data-correct="tov">
+          <p class="dnd-zone-label">Gets penalized with a -1.5x subtraction multiplier</p>
+          <div class="dnd-zone-target">Drop here</div>
+        </div>
+      </div>
+      <div style="margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: center;">
+        <button class="btn" onclick="checkDnD('dnd-module3')">Check Matches</button>
+        <button class="btn" style="background: transparent; border: 1px solid var(--color-border); color: var(--color-text)" onclick="resetDnD('dnd-module3')">Reset</button>
+      </div>
+      <div class="dnd-feedback" id="dnd-feedback" style="display: none; padding: 1rem; border-radius: 4px; border: 1px solid; margin-top: 1rem; margin-bottom: 2rem;"></div>
+    </div>
+    <script>
+    // Polyfill simple check/reset for DnD if required or left out of main.js
+    window.checkDnD = function(id) {
+       const container = document.getElementById(id);
+       if (!container) return;
+       const zones = container.querySelectorAll('.dnd-zone');
+       let allCorrect = true;
+       zones.forEach(z => {
+         const target = z.querySelector('.dnd-zone-target');
+         const isCorrect = target.dataset.placed === z.dataset.correct;
+         if (!isCorrect) allCorrect = false;
+         target.style.background = isCorrect ? 'var(--color-success-light)' : (target.dataset.placed ? 'var(--color-error-light)' : '');
+       });
+       const fb = container.querySelector('.dnd-feedback');
+       if (fb) {
+           fb.style.display = 'block';
+           fb.style.borderColor = allCorrect ? 'var(--color-success)' : 'var(--color-error)';
+           fb.style.color = allCorrect ? 'var(--color-success)' : 'var(--color-error)';
+           fb.style.backgroundColor = allCorrect ? 'var(--color-success-light)' : 'var(--color-error-light)';
+           fb.innerHTML = allCorrect ? '<strong>Great job!</strong> You matched the code logic completely.' : '<strong>Not quite!</strong> Keep trying or check the code block again.';
+       }
+    };
+    window.resetDnD = function(id) {
+       const container = document.getElementById(id);
+       if (!container) return;
+       const zones = container.querySelectorAll('.dnd-zone');
+       zones.forEach(z => {
+         const target = z.querySelector('.dnd-zone-target');
+         target.textContent = 'Drop here';
+         delete target.dataset.placed;
+         target.style.background = '';
+       });
+       container.querySelectorAll('.dnd-chip').forEach(c => {
+         c.classList.remove('placed', 'dragging');
+       });
+       const fb = container.querySelector('.dnd-feedback');
+       if (fb) fb.style.display = 'none';
+    };
+    </script>
+    
+
+    <div class="scenario-block" style="margin-top: 2rem;">
+      <div class="scenario-context">
+        <span class="scenario-label">Scenario</span>
+        <p>If Lebron scores 0 Points, 0 Rebounds, 0 Assists, and gets 2 Steals... What is his Game Score?</p>
+      </div>
+      <div class="quiz-container" id="quiz-scenario3">
+        <div class="quiz-question-block"
+             data-correct="option-b"
+             data-explanation-right="Exactly! 2 points per steal means a quick math calculation: 2 * 2 = 4."
+             data-explanation-wrong="Not quite. Look at the `+ p.get('STL', 0) * 2` line again!">
+          <div class="quiz-options">
+            <button class="quiz-option" data-value="option-a" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>2.0</span>
+            </button>
+            <button class="quiz-option" data-value="option-b" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>4.0</span>
+            </button>
+            <button class="quiz-option" data-value="option-c" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>0.0</span>
+            </button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <button class="quiz-check-btn" onclick="checkQuiz('quiz-scenario3')">Check Answers</button>
+        <button class="quiz-reset-btn" onclick="resetQuiz('quiz-scenario3')">Try Again</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="module" id="module-4">
+  <div class="module-header">
+    <div class="module-eyebrow">Module 04</div>
+    <h2 class="module-title">The User Interface</h2>
+  </div>
+
+  <div class="module-content">
+    <p>We've fetched the data, calculated the scores, and played the game. But a game only feels premium if it reacts magically to your touch. That's the power of the frontend interface.</p>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">✨</div>
+      <div class="callout-content">
+        <strong class="callout-title">Juice</strong>
+        <p>In game design, "juice" is the magical feeling of a button snapping, screen shaking, or card sliding in gracefully. In NBA Showdown, we add juice using a library called <span class="term" data-definition="A powerful animation library for React that makes elements smoothly transition between states instead of teleporting.">Framer Motion</span>.</p>
+      </div>
+    </div>
+
+    <h3>Buttery Smooth Cards</h3>
+    <p>Look at how the player cards slide into the arena. Instead of instantly teleporting (which feels cheap), they fade in and drift upwards. Let's look at the actual code that orchestrates this dance.</p>
+
+    <div class="translation-block animate-in">
+      <div class="translation-code">
+        <span class="translation-label">CODE</span>
+        <pre><code><span class="code-line">&lt;<span class="code-keyword">motion.div</span></span>
+<span class="code-line">  <span class="code-property">initial</span>={{ opacity: 0, y: 40, scale: 0.95 }}</span>
+<span class="code-line">  <span class="code-property">animate</span>={{ opacity: 1, y: 0, scale: 1 }}</span>
+<span class="code-line">  <span class="code-property">exit</span>={{ opacity: 0, y: -40, scale: 0.95 }}</span>
+<span class="code-line">  <span class="code-property">whileHover</span>={{ scale: 1.02 }}</span>
+<span class="code-line">  <span class="code-property">whileTap</span>={{ scale: 0.98 }}</span>
+<span class="code-line">  <span class="code-property">transition</span>={{ <span class="code-property">duration</span>: 0.28 }}</span>
+<span class="code-line">&gt;</span></code></pre>
+      </div>
+      <div class="translation-english">
+        <span class="translation-label">PLAIN ENGLISH</span>
+        <div class="translation-lines">
+          <p class="tl">Create a magic box container for our player card...</p>
+          <p class="tl">Before it loads, set it to be invisible, shifted downwards 40 pixels, and slightly shrunk.</p>
+          <p class="tl">When it enters the screen, smoothly fade into reality at its normal size and zero offset.</p>
+          <p class="tl">When it loses the round, neatly drift upwards and fade out completely.</p>
+          <p class="tl">If the user hovers their mouse over it, pop out slightly (1.02x).</p>
+          <p class="tl">When they click, dramatically compress the card inwards (0.98x).</p>
+          <p class="tl">Make all these fluid animations last exactly 0.28 seconds.</p>
+          <p class="tl">End of the magic box declaration.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Building the Layers</h3>
+    <p>Modern web development is built like a sandwich. An unstyled site is just bones. Add CSS to give it skin. Add Javascript to give it muscles.</p>
+
+    <div class="layer-demo" style="margin-top: 2rem;">
+      <div class="layer-tabs">
+        <button class="layer-tab active" onclick="showLayer('html')">HTML</button>
+        <button class="layer-tab" onclick="showLayer('css')">+ CSS</button>
+        <button class="layer-tab" onclick="showLayer('js')">+ JS</button>
+      </div>
+      <div class="layer-viewport" style="background:#fff; min-height: 200px; padding: 20px; border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+        <div class="layer" id="layer-html" style="display:block;">
+          <div><img src="https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg" alt="Lakers" width="40"><br><strong>LeBron James</strong><br><span>25 PTS • 7 REB • 7 AST</span></div>
+        </div>
+        <div class="layer" id="layer-css" style="display:none; text-align: center;">
+          <div style="background: #111; color: white; display: inline-block; padding: 20px; border-radius: 20px; border: 2px solid #555; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <img src="https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg" alt="Lakers" width="60" style="margin-bottom: 15px;"><br>
+            <strong style="font-size: 1.5rem;">LeBron James</strong><br>
+            <span style="color: #aaa;">25 PTS • 7 REB • 7 AST</span>
+          </div>
+        </div>
+        <div class="layer" id="layer-js" style="display:none; text-align: center;">
+          <div style="background: #111; color: white; display: inline-block; padding: 20px; border-radius: 20px; border: 2px solid #D94F30; box-shadow: 0 10px 40px rgba(217,79,48,0.3); transform: scale(1.05); transition: all 0.3s; cursor: pointer;">
+            <img src="https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg" alt="Lakers" width="60" style="margin-bottom: 15px;"><br>
+            <strong style="font-size: 1.5rem;">LeBron James</strong><br>
+            <span style="color: #aaa;">25 PTS • 7 REB • 7 AST</span>
+            <div style="margin-top:20px; background: #D94F30; color: white; padding: 10px; border-radius: 5px; font-weight: bold;">Select Player 🏀</div>
+          </div>
+        </div>
+      </div>
+      <p class="layer-description" id="layer-desc" style="margin-top:1rem; font-weight: 500;">This is the raw data (bones). Just structural facts.</p>
+    </div>
+    
+    <script>
+    window.showLayer = function(layer) {
+      document.querySelectorAll('.layer-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.layer').forEach(l => l.style.display = 'none');
+      document.getElementById('layer-'+layer).style.display = 'block';
+      
+      const desc = document.getElementById('layer-desc');
+      if (layer === 'html') desc.textContent = "This is the raw data (bones). Just structural HTML facts with zero design.";
+      if (layer === 'css') desc.textContent = "CSS adds the glassmorphism, rounded corners, drop shadows, and visual layout.";
+      if (layer === 'js') desc.textContent = "Javascript adds the interactive glow, the hover zoom effects, and the 'Select Player' interactive logic!";
+    }
+    </script>
+
+    <div class="bug-challenge" style="margin-top: 3rem;">
+      <h3>Find the bug in this code:</h3>
+      <div class="bug-code">
+        <div class="bug-line" data-line="1" onclick="checkBugLine(this, false)">
+          <span class="line-num">1</span>
+          <code>&lt;motion.div</code>
+        </div>
+        <div class="bug-line bug-target" data-line="2" onclick="checkBugLine(this, true)">
+          <span class="line-num">2</span>
+          <code>  initial={{ opacity: 1, y: 0 }}</code>
+        </div>
+        <div class="bug-line" data-line="3" onclick="checkBugLine(this, false)">
+          <span class="line-num">3</span>
+          <code>  animate={{ opacity: 1, y: 0 }}</code>
+        </div>
+        <div class="bug-line" data-line="4" onclick="checkBugLine(this, false)">
+          <span class="line-num">4</span>
+          <code>  exit={{ opacity: 0, y: -40 }}</code>
+        </div>
+        <div class="bug-line" data-line="5" onclick="checkBugLine(this, false)">
+          <span class="line-num">5</span>
+          <code>&gt;</code>
+        </div>
+      </div>
+      <div class="bug-feedback" id="bug-feedback"></div>
+    </div>
+    <script>
+    window.checkBugLine = function(el, isCorrect) {
+      const feedback = el.closest('.bug-challenge').querySelector('.bug-feedback');
+      if (isCorrect) {
+        el.classList.add('correct');
+        feedback.innerHTML = '<strong>Found it!</strong> If the initial state matches the animate state (`opacity: 1`), there is no animation journey to travel! The element will literally just teleport onto the screen instantly instead of fading in. Fix: `initial={{ opacity: 0, y: 40 }}`.';
+        feedback.className = 'bug-feedback show success';
+      } else {
+        el.classList.add('incorrect');
+        feedback.innerHTML = 'Not this line — think about what happens when the starting state matches the destination state!';
+        feedback.className = 'bug-feedback show error';
+        setTimeout(() => { el.classList.remove('incorrect'); feedback.className = 'bug-feedback'; }, 4000);
+      }
+    };
+    </script>
+
+  </div>
+</section>
+  </main>
+
+</body>
+</html>

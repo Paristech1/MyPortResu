@@ -1,0 +1,139 @@
+<section class="module" id="module-2">
+  <div class="module-header">
+    <div class="module-eyebrow">Module 02</div>
+    <h2 class="module-title">Behind the Scenes</h2>
+  </div>
+
+  <div class="module-content">
+    <p>We know how the showdown works on screen, but where do the players come from? They don't live in our code. Instead, we have to go out and fetch the raw box scores from the real world.</p>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">🌐</div>
+      <div class="callout-content">
+        <strong class="callout-title">The Three-Tier System</strong>
+        <p>Our app consists of a frontend (the interface you click on), a backend (our Python brain that shapes the data), and a third-party <span class="term" data-definition="Application Programming Interface. A set of rules that allows two applications to talk to each other. Like a waiter taking your order to the kitchen.">API</span> (the official NBA data servers). They have to work together perfectly.</p>
+      </div>
+    </div>
+
+    <h3>The Relay Race</h3>
+    <p>When you start a fresh game, your browser doesn't talk directly to the NBA. It talks to our backend server, which acts like a specialized courier.</p>
+
+    <div class="chat-window" id="chat-module2">
+      <div class="chat-messages">
+        <div class="chat-message" data-msg="0" data-sender="actor-a" style="display:none">
+          <div class="chat-avatar" style="background: var(--color-actor-1)">F</div>
+          <div class="chat-bubble">
+            <span class="chat-sender" style="color: var(--color-actor-1)">Frontend</span>
+            <p>Hey Backend! The user wants to play. Can you get today's matchups?</p>
+          </div>
+        </div>
+        <div class="chat-message" data-msg="1" data-sender="actor-b" style="display:none">
+          <div class="chat-avatar" style="background: var(--color-actor-2)">B</div>
+          <div class="chat-bubble">
+            <span class="chat-sender" style="color: var(--color-actor-2)">Backend</span>
+            <p>On it. NBA API, what games happened today?</p>
+          </div>
+        </div>
+        <div class="chat-message" data-msg="2" data-sender="actor-c" style="display:none">
+          <div class="chat-avatar" style="background: var(--color-actor-3)">N</div>
+          <div class="chat-bubble">
+            <span class="chat-sender" style="color: var(--color-actor-3)">NBA API</span>
+            <p>Here you go: Lakers vs Celtics, Heat vs Knicks...</p>
+          </div>
+        </div>
+        <div class="chat-message" data-msg="3" data-sender="actor-b" style="display:none">
+          <div class="chat-avatar" style="background: var(--color-actor-2)">B</div>
+          <div class="chat-bubble">
+            <span class="chat-sender" style="color: var(--color-actor-2)">Backend</span>
+            <p>Awesome. Give me the box scores for ALL of those games immediately!</p>
+          </div>
+        </div>
+        <div class="chat-message" data-msg="4" data-sender="actor-b" style="display:none">
+          <div class="chat-avatar" style="background: var(--color-actor-2)">B</div>
+          <div class="chat-bubble">
+            <span class="chat-sender" style="color: var(--color-actor-2)">Backend</span>
+            <p>Alright Frontend, scored 'em all up. Here's your final daily deck of players.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-typing" id="chat-module2-typing" style="display:none">
+        <div class="chat-avatar" id="chat-module2-typing-avatar">?</div>
+        <div class="chat-typing-dots">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+      </div>
+
+      <div class="chat-controls">
+        <button class="btn chat-next-btn">Next Message</button>
+        <button class="btn chat-all-btn">Play All</button>
+        <button class="btn chat-reset-btn">Replay</button>
+        <span class="chat-progress"></span>
+      </div>
+    </div>
+
+    <h3>The Need for Speed</h3>
+    <p>On an average night, there might be 10 NBA games playing. If the backend asked the NBA for Game 1's boxscore, waited for the reply, then asked for Game 2, and so on, you would be staring at a loading spinner forever. It's like a supermarket only having one checkout line open.</p>
+
+    <p>To fix this, the backend uses <span class="term" data-definition="Doing multiple things at exactly the same time.">concurrency</span>. It asks for all the games simultaneously by spawning "workers", like opening 5 checkout lanes at once.</p>
+
+    <div class="translation-block animate-in">
+      <div class="translation-code">
+        <span class="translation-label">CODE</span>
+        <pre><code><span class="code-line"><span class="code-keyword">with</span> <span class="code-function">ThreadPoolExecutor</span>(<span class="code-property">max_workers</span>=5) <span class="code-keyword">as</span> executor:</span>
+<span class="code-line">    futures = {executor.<span class="code-function">submit</span>(_fetch_box_score, gid): gid <span class="code-keyword">for</span> gid <span class="code-keyword">in</span> game_ids}</span>
+<span class="code-line">    <span class="code-keyword">for</span> future <span class="code-keyword">in</span> <span class="code-function">as_completed</span>(futures):</span>
+<span class="code-line">        <span class="code-keyword">try</span>:</span>
+<span class="code-line">            player_pool.<span class="code-function">extend</span>(future.<span class="code-function">result</span>())</span>
+<span class="code-line">        <span class="code-keyword">except</span> Exception <span class="code-keyword">as</span> e:</span>
+<span class="code-line">            <span class="code-function">print</span>(<span class="code-string">f"Error in thread for {futures[future]}: {e}"</span>)</span></code></pre>
+      </div>
+      <div class="translation-english">
+        <span class="translation-label">PLAIN ENGLISH</span>
+        <div class="translation-lines">
+          <p class="tl">Spin up a pool of 5 workers who can fetch requests simultaneously.</p>
+          <p class="tl">Give each worker an assignment: "Go fetch the box score for a specific game ID!"</p>
+          <p class="tl">As soon as *any* worker returns from the NBA with their results...</p>
+          <p class="tl"><br/></p>
+          <p class="tl">Take the players they found and dump them into our giant pool of players.</p>
+          <p class="tl">But if a worker crashes or gets an error instead...</p>
+          <p class="tl">Safely ignore that broken game so the rest of the app doesn't crash!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-block">
+      <div class="scenario-context">
+        <span class="scenario-label">Scenario</span>
+        <p>A user emails you complaining that on Saturdays (when there are sometimes 15+ games), the "Loading today's matchups" spinner takes 12 seconds instead of 4 seconds. What is the most likely strategy to speed this up?</p>
+      </div>
+      <div class="quiz-container" id="quiz-scenario2">
+        <div class="quiz-question-block"
+             data-correct="option-b"
+             data-explanation-right="Nailed it! 5 workers handling 15 requests takes 3 sequential rounds of fetching. Bumping the workers opens more lanes and fetches the jobs faster."
+             data-explanation-wrong="Not quite. That might help a tiny bit, but the fundamental bottleneck here is concurrency: we have too few workers juggling too many game requests.">
+          <div class="quiz-options">
+            <button class="quiz-option" data-value="option-a" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>Switch to a completely different database on the backend.</span>
+            </button>
+            <button class="quiz-option" data-value="option-b" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>Increase `max_workers` from 5 to 15 so all game boxscores can be fetched simultaneously.</span>
+            </button>
+            <button class="quiz-option" data-value="option-c" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>Require users to refresh their browser harder to fetch data sooner.</span>
+            </button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <button class="quiz-check-btn" onclick="checkQuiz('quiz-scenario2')">Check Answers</button>
+        <button class="quiz-reset-btn" onclick="resetQuiz('quiz-scenario2')">Try Again</button>
+      </div>
+    </div>
+
+  </div>
+</section>

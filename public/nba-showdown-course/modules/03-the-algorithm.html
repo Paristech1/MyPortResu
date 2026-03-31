@@ -1,0 +1,144 @@
+<section class="module" id="module-3">
+  <div class="module-header">
+    <div class="module-eyebrow">Module 03</div>
+    <h2 class="module-title">The Algorithm</h2>
+  </div>
+
+  <div class="module-content">
+    <p>NBA Showdown leaves the final decision up to you, but to help you decide, the app provides a "Game Score" number for everyone.</p>
+
+    <div class="callout callout-accent">
+      <div class="callout-icon">📊</div>
+      <div class="callout-content">
+        <strong class="callout-title">Composite Metrics</strong>
+        <p>A "composite metric" is a software engineering technique where you merge many variables (Points, Assists, Rebounds) into one single, powerful number. It gives the user an instant, at-a-glance summary instead of making them compare six individual numbers themselves.</p>
+      </div>
+    </div>
+
+    <h3>The Formula Under the Hood</h3>
+    <p>Look at the specific <span class="term" data-definition="A reusable piece of logic that does math or runs calculations for you inside your program.">function</span> in the backend that calculates the Game Score.</p>
+
+    <div class="translation-block animate-in">
+      <div class="translation-code">
+        <span class="translation-label">CODE</span>
+        <pre><code><span class="code-line"><span class="code-keyword">def</span> <span class="code-function">_game_score</span>(p):</span>
+<span class="code-line">    <span class="code-keyword">return</span> (</span>
+<span class="code-line">        p[<span class="code-string">"PTS"</span>] + p[<span class="code-string">"REB"</span>] * 1.2 + p[<span class="code-string">"AST"</span>] * 1.5</span>
+<span class="code-line">        + p.<span class="code-function">get</span>(<span class="code-string">"STL"</span>, 0) * 2 + p.<span class="code-function">get</span>(<span class="code-string">"BLK"</span>, 0) * 2</span>
+<span class="code-line">        - p.<span class="code-function">get</span>(<span class="code-string">"TOV"</span>, 0) * 1.5</span>
+<span class="code-line">    )</span></code></pre>
+      </div>
+      <div class="translation-english">
+        <span class="translation-label">PLAIN ENGLISH</span>
+        <div class="translation-lines">
+          <p class="tl">To calculate the game score of player "p"...</p>
+          <p class="tl">Let's tally up the math!</p>
+          <p class="tl">Give 1 point per basket, 1.2 points per rebound, 1.5 per assist.</p>
+          <p class="tl">Give an extra 2 points for every steal or block (defensive bonuses!).</p>
+          <p class="tl">Subtract 1.5 points for every turnover (mistakes matter!).</p>
+          <p class="tl">Add it all up and return the result as the single Game Score number.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Matching the Weights</h3>
+    <p>Let's see if you can remember the math. Drag each stat line to the correct weight from the code above.</p>
+
+    <div class="dnd-container" id="dnd-module3">
+      <div class="dnd-chips">
+        <div class="dnd-chip" draggable="true" data-answer="pts">Points (PTS)</div>
+        <div class="dnd-chip" draggable="true" data-answer="reb">Rebounds (REB)</div>
+        <div class="dnd-chip" draggable="true" data-answer="ast">Assists (AST)</div>
+        <div class="dnd-chip" draggable="true" data-answer="def">Steals/Blocks</div>
+        <div class="dnd-chip" draggable="true" data-answer="tov">Turnovers (TOV)</div>
+      </div>
+      <div class="dnd-zones">
+        <div class="dnd-zone" data-correct="def">
+          <p class="dnd-zone-label">Gets a 2.0x bonus multiplier</p>
+          <div class="dnd-zone-target">Drop here</div>
+        </div>
+        <div class="dnd-zone" data-correct="tov">
+          <p class="dnd-zone-label">Gets penalized with a -1.5x subtraction multiplier</p>
+          <div class="dnd-zone-target">Drop here</div>
+        </div>
+      </div>
+      <div style="margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: center;">
+        <button class="btn" onclick="checkDnD('dnd-module3')">Check Matches</button>
+        <button class="btn" style="background: transparent; border: 1px solid var(--color-border); color: var(--color-text)" onclick="resetDnD('dnd-module3')">Reset</button>
+      </div>
+      <div class="dnd-feedback" id="dnd-feedback" style="display: none; padding: 1rem; border-radius: 4px; border: 1px solid; margin-top: 1rem; margin-bottom: 2rem;"></div>
+    </div>
+    <script>
+    // Polyfill simple check/reset for DnD if required or left out of main.js
+    window.checkDnD = function(id) {
+       const container = document.getElementById(id);
+       if (!container) return;
+       const zones = container.querySelectorAll('.dnd-zone');
+       let allCorrect = true;
+       zones.forEach(z => {
+         const target = z.querySelector('.dnd-zone-target');
+         const isCorrect = target.dataset.placed === z.dataset.correct;
+         if (!isCorrect) allCorrect = false;
+         target.style.background = isCorrect ? 'var(--color-success-light)' : (target.dataset.placed ? 'var(--color-error-light)' : '');
+       });
+       const fb = container.querySelector('.dnd-feedback');
+       if (fb) {
+           fb.style.display = 'block';
+           fb.style.borderColor = allCorrect ? 'var(--color-success)' : 'var(--color-error)';
+           fb.style.color = allCorrect ? 'var(--color-success)' : 'var(--color-error)';
+           fb.style.backgroundColor = allCorrect ? 'var(--color-success-light)' : 'var(--color-error-light)';
+           fb.innerHTML = allCorrect ? '<strong>Great job!</strong> You matched the code logic completely.' : '<strong>Not quite!</strong> Keep trying or check the code block again.';
+       }
+    };
+    window.resetDnD = function(id) {
+       const container = document.getElementById(id);
+       if (!container) return;
+       const zones = container.querySelectorAll('.dnd-zone');
+       zones.forEach(z => {
+         const target = z.querySelector('.dnd-zone-target');
+         target.textContent = 'Drop here';
+         delete target.dataset.placed;
+         target.style.background = '';
+       });
+       container.querySelectorAll('.dnd-chip').forEach(c => {
+         c.classList.remove('placed', 'dragging');
+       });
+       const fb = container.querySelector('.dnd-feedback');
+       if (fb) fb.style.display = 'none';
+    };
+    </script>
+    
+
+    <div class="scenario-block" style="margin-top: 2rem;">
+      <div class="scenario-context">
+        <span class="scenario-label">Scenario</span>
+        <p>If Lebron scores 0 Points, 0 Rebounds, 0 Assists, and gets 2 Steals... What is his Game Score?</p>
+      </div>
+      <div class="quiz-container" id="quiz-scenario3">
+        <div class="quiz-question-block"
+             data-correct="option-b"
+             data-explanation-right="Exactly! 2 points per steal means a quick math calculation: 2 * 2 = 4."
+             data-explanation-wrong="Not quite. Look at the `+ p.get('STL', 0) * 2` line again!">
+          <div class="quiz-options">
+            <button class="quiz-option" data-value="option-a" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>2.0</span>
+            </button>
+            <button class="quiz-option" data-value="option-b" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>4.0</span>
+            </button>
+            <button class="quiz-option" data-value="option-c" onclick="selectOption(this)">
+              <div class="quiz-option-radio"></div>
+              <span>0.0</span>
+            </button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <button class="quiz-check-btn" onclick="checkQuiz('quiz-scenario3')">Check Answers</button>
+        <button class="quiz-reset-btn" onclick="resetQuiz('quiz-scenario3')">Try Again</button>
+      </div>
+    </div>
+
+  </div>
+</section>

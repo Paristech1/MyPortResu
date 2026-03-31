@@ -1,0 +1,119 @@
+<section class="module" id="module-1">
+  <div class="module-header">
+    <div class="module-eyebrow">Module 01</div>
+    <h2 class="module-title">The Core Loop</h2>
+  </div>
+
+  <div class="module-content">
+    <p>Imagine you're arguing with your friends about which NBA player had the best night. Instead of just looking at a boring spreadsheet, <strong>NBA Showdown</strong> turns it into a game. Two players appear on screen. You pick the best one. The winner stays; the loser goes home. You keep picking until only one <span class="term" data-definition="A champion who outlasted everyone else in the showdown bracket.">Baller of the Night</span> remains.</p>
+
+    <div class="callout callout-accent">
+      <div class="callout-icon">💡</div>
+      <div class="callout-content">
+        <strong class="callout-title">The "Hot or Not" Pattern</strong>
+        <p>This is a classic software pattern: taking a complex dataset (dozens of players with multiple stats) and reducing it to a series of simple, binary choices. It lowers the cognitive load for the user.</p>
+      </div>
+    </div>
+
+    <h3>What happens when you click?</h3>
+    <p>Every time you pick a player, the app runs a specific <span class="term" data-definition="A self-contained block of code designed to do one specific job.">function</span> to handle the match. Let's trace the journey of your click into the code.</p>
+
+    <div class="translation-block animate-in">
+      <div class="translation-code">
+        <span class="translation-label">CODE</span>
+        <pre><code><span class="code-line"><span class="code-keyword">function</span> <span class="code-function">handlePick</span>(side) {</span>
+<span class="code-line">  <span class="code-keyword">const</span> selected = side === <span class="code-string">'left'</span> ? leftPlayer : rightPlayer;</span>
+<span class="code-line">  <span class="code-keyword">const</span> eliminated = side === <span class="code-string">'left'</span> ? rightPlayer : leftPlayer;</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-keyword">if</span> (deck.length < 1) {</span>
+<span class="code-line">    <span class="code-function">setWinner</span>(selected);</span>
+<span class="code-line">    <span class="code-keyword">return</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-keyword">const</span> updatedDeck = [...deck, selected];</span>
+<span class="code-line">  <span class="code-keyword">const</span> shuffledDeck = updatedDeck.<span class="code-function">sort</span>(() => 0.5 - Math.<span class="code-function">random</span>());</span>
+<span class="code-line">}</span></code></pre>
+      </div>
+      <div class="translation-english">
+        <span class="translation-label">PLAIN ENGLISH</span>
+        <div class="translation-lines">
+          <p class="tl">When a user clicks a card, start the match resolution.</p>
+          <p class="tl">Figure out who they picked based on the side they clicked.</p>
+          <p class="tl">Figure out who lost (the other guy).</p>
+          <p class="tl"><br/></p>
+          <p class="tl">If there's nobody left in the deck to play...</p>
+          <p class="tl">Crown the current selected player as the overall winner!</p>
+          <p class="tl">Stop here.</p>
+          <p class="tl"><br/></p>
+          <p class="tl">Otherwise, throw the winner back into the pool of players.</p>
+          <p class="tl">Shuffle the deck so the next match is random.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>This creates an endless loop of matchups until the `deck` (our remaining player pool) is completely empty.</p>
+
+    <h3>Tracing the Elimination</h3>
+    <p>Let's map out exactly how players move through the system when you make a choice.</p>
+
+    <div class="flow-animation" data-steps='[
+      {"highlight":"flow-actor-1","label":"You click the LeBron James card"},
+      {"highlight":"flow-actor-2","label":"The handlePick function runs","packet":true,"from":"actor-1","to":"actor-2"},
+      {"highlight":"flow-actor-3","label":"LeBron is added to the updatedDeck array","packet":true,"from":"actor-2","to":"actor-3"},
+      {"highlight":"flow-actor-4","label":"The loser is discarded completely","packet":true,"from":"actor-2","to":"actor-4"}
+    ]'>
+      <div class="flow-actors">
+        <div class="flow-actor" id="flow-actor-1">
+          <div class="flow-actor-icon">👆</div>
+          <span>User Click</span>
+        </div>
+        <div class="flow-actor" id="flow-actor-2">
+          <div class="flow-actor-icon">⚙️</div>
+          <span>handlePick</span>
+        </div>
+        <div class="flow-actor" id="flow-actor-3">
+          <div class="flow-actor-icon">📥</div>
+          <span>Deck Array</span>
+        </div>
+        <div class="flow-actor" id="flow-actor-4">
+          <div class="flow-actor-icon">🗑️</div>
+          <span>Trash</span>
+        </div>
+      </div>
+      <div class="flow-packet" id="flow-packet"></div>
+      <div class="flow-step-label" id="flow-label">Click "Next Step" to begin</div>
+      <div class="flow-controls">
+        <button class="btn flow-next-btn">Next Step</button>
+        <button class="btn flow-reset-btn">Restart</button>
+        <span class="flow-progress"></span>
+      </div>
+    </div>
+
+    <div class="quiz-container" id="quiz-module1">
+      <div class="quiz-question-block"
+           data-correct="option-b"
+           data-explanation-right="Exactly! Adding them to the deck array means they stay in the game and will eventually be drawn again for another matchup."
+           data-explanation-wrong="Not quite. In this game, winning just means you survive to fight another round. Think about where the code places the selected player.">
+        <h3 class="quiz-question">When a player wins a matchup and the deck isn't empty, what happens to them?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="option-a" onclick="selectOption(this)">
+            <div class="quiz-option-radio"></div>
+            <span>They instantly become the Baller of the Night.</span>
+          </button>
+          <button class="quiz-option" data-value="option-b" onclick="selectOption(this)">
+            <div class="quiz-option-radio"></div>
+            <span>They are thrown back into the random deck to fight again later.</span>
+          </button>
+          <button class="quiz-option" data-value="option-c" onclick="selectOption(this)">
+            <div class="quiz-option-radio"></div>
+            <span>They sit in a special "Winners Circle" list until the end.</span>
+          </button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <button class="quiz-check-btn" onclick="checkQuiz('quiz-module1')">Check Answers</button>
+      <button class="quiz-reset-btn" onclick="resetQuiz('quiz-module1')">Try Again</button>
+    </div>
+
+  </div>
+</section>
