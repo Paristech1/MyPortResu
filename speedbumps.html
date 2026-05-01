@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpeedBump | Portfolio</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo logo--header logo--desktop-only"><a href="index.html"><span class="highlight">Paris</span>.</a></div>
+    <nav class="nav">
+      <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experience">Work</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="project-detail">
+      <div class="container">
+        <a href="index.html" class="logo logo--scroll logo--mobile-only"><span class="highlight">Paris</span>.</a>
+        
+        <!-- Project Hero -->
+        <div class="project-detail-hero">
+          <span class="project-badge badge-web">WEB APP</span>
+          <h1 class="reveal-text">SpeedBump: Outsmarting Philly's Speed Bumps</h1>
+          <p class="reveal-text project-detail-subtitle">
+            A specialized navigation solution designed to help drivers navigate Philadelphia's streets more smoothly by avoiding the city's 1,584+ officially installed speed bumps, humps, and cushions.
+          </p>
+          <div class="project-detail-cover" style="margin-bottom: 2rem;">
+            <img src="/src/assets/speedbump-thumbnail.png" alt="SpeedBump - Philly Speed Bump Navigation">
+          </div>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem;">
+            <a href="https://speedbumps.netlify.app/" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.9rem;">
+              Use the App Live ↗
+            </a>
+            <a href="https://www.notion.so/SpeedBump-Outsmarting-Philly-s-1-584-City-Installed-Speed-Bumps-352109e88561809c824cd2d6b36fe01f" target="_blank" rel="noopener" class="btn-primary" style="background: transparent; padding: 0.75rem 1.5rem; font-size: 0.9rem;">
+              View Full Documentation ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Project Overview / Notion Embed -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Project Documentation</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            The project was conceived as a response to the rapidly increasing number of traffic calming measures in Philadelphia. Using OpenDataPhilly's datasets, I developed a routing algorithm that intelligently minimizes impact on vehicle suspension and improves travel time consistency.
+          </p>
+          
+          <div class="notion-embed-wrapper" style="position: relative; overflow: hidden; width: 100%; padding-top: 100%; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0,0,0,0.2);">
+            <iframe
+              src="https://www.notion.so/SpeedBump-Outsmarting-Philly-s-1-584-City-Installed-Speed-Bumps-352109e88561809c824cd2d6b36fe01f"
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+              title="SpeedBump Notion Documentation"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+            <!-- Fallback Overlay if Iframe is blocked -->
+            <div class="embed-fallback" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.8); z-index: -1; text-align: center; padding: 2rem;">
+                <p style="margin-bottom: 1rem;">If the documentation doesn't load below, you can view it directly on Notion.</p>
+                <a href="https://www.notion.so/SpeedBump-Outsmarting-Philly-s-1-584-City-Installed-Speed-Bumps-352109e88561809c824cd2d6b36fe01f" target="_blank" rel="noopener" class="btn-primary">Open in Notion</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="project-detail-section" style="margin-top: 4rem;">
+          <h2 class="section-subtitle">Key Features</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="color: var(--accent-color); margin-bottom: 0.75rem;">Smart Avoidance Routing</h3>
+                <p class="project-detail-text" style="font-size: 0.9rem;">Custom routing engine that prioritizes "Smooth" paths by weighting road segments based on speed bump density and severity.</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="color: var(--accent-color); margin-bottom: 0.75rem;">Official Data Integration</h3>
+                <p class="project-detail-text" style="font-size: 0.9rem;">Direct API integration with OpenDataPhilly to fetch real-time updates on traffic calming measures across the city.</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="color: var(--accent-color); margin-bottom: 0.75rem;">Severity Scoring</h3>
+                <p class="project-detail-text" style="font-size: 0.9rem;">Accelerometer-based scoring system that allows users to rate the "impact" of specific bumps, crowdsourcing a detailed map of road conditions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Back to Projects -->
+        <div class="projects-cta" style="margin-top: 5rem;">
+          <a href="projects.html" class="btn-primary">
+            ← Back to Projects
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
