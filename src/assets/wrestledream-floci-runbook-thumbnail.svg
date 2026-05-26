@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="WrestleDream Floci Docker Terraform runbook project thumbnail">
+  <defs>
+    <linearGradient id="wd-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0a0f0d"/>
+    </linearGradient>
+    <linearGradient id="wd-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <pattern id="wd-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e3a5f" stroke-width="0.5" opacity="0.4"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="url(#wd-bg)"/>
+  <rect width="600" height="400" fill="url(#wd-grid)" opacity="0.6"/>
+  <text x="28" y="52" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-weight="800" font-size="22" fill="url(#wd-accent)">WRESTLEDREAM</text>
+  <text x="28" y="78" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-weight="600" font-size="13" fill="#94a3b8">Floci · Docker · Terraform</text>
+  <rect x="28" y="98" width="544" height="268" rx="8" fill="rgba(15, 23, 42, 0.92)" stroke="#334155" stroke-width="1.2"/>
+  <text x="44" y="128" font-family="ui-monospace, Consolas, monospace" font-size="11" fill="#64748b"># Terminal 1  Floci</text>
+  <text x="44" y="148" font-family="ui-monospace, Consolas, monospace" font-size="10" fill="#38bdf8">docker run --rm -p 4566:4566 floci/floci:latest</text>
+  <text x="44" y="172" font-family="ui-monospace, Consolas, monospace" font-size="11" fill="#64748b"># Terminal 2  Terraform</text>
+  <text x="44" y="192" font-family="ui-monospace, Consolas, monospace" font-size="10" fill="#a78bfa">terraform apply -auto-approve</text>
+  <text x="44" y="212" font-family="ui-monospace, Consolas, monospace" font-size="10" fill="#86efac">  + aws_lambda_function.wrestledream-api</text>
+  <text x="44" y="232" font-family="ui-monospace, Consolas, monospace" font-size="10" fill="#86efac">  + aws_api_gateway_rest_api.main</text>
+  <text x="44" y="252" font-family="ui-monospace, Consolas, monospace" font-size="10" fill="#86efac">  + aws_dynamodb_table.wrestler_cache</text>
+  <text x="44" y="280" font-family="ui-monospace, Consolas, monospace" font-size="11" fill="#64748b"># health</text>
+  <text x="44" y="300" font-family="ui-monospace, Consolas, monospace" font-size="10" fill="#fbbf24">{"status":"ok","app":"WrestleDream"}</text>
+  <g transform="translate(480 118)">
+    <rect x="0" y="0" width="72" height="52" rx="6" fill="rgba(56, 189, 248, 0.12)" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="36" y="32" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">Docker</text>
+  </g>
+  <g transform="translate(480 182)">
+    <rect x="0" y="0" width="72" height="52" rx="6" fill="rgba(124, 58, 237, 0.12)" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="36" y="32" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#a78bfa">Terraform</text>
+  </g>
+  <g transform="translate(480 246)">
+    <rect x="0" y="0" width="72" height="52" rx="6" fill="rgba(245, 158, 11, 0.12)" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="36" y="32" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#f59e0b">AWS</text>
+  </g>
+</svg>
