@@ -262,6 +262,12 @@
                 <li>Incident Documentation</li>
                 <li>Docker</li>
                 <li>Terraform</li>
+                <li>Bash / Shell Scripting</li>
+                <li>Python</li>
+                <li>Linux (Kali, Ubuntu)</li>
+                <li>AWS (Lambda, API Gateway, S3, DynamoDB)</li>
+                <li>Infrastructure as Code</li>
+                <li>FastAPI</li>
               </ul>
             </div>
 
@@ -311,19 +317,22 @@
             <ul class="dropdown-menu">
               <li class="dropdown-item active" data-filter="all">All Projects</li>
               <li class="dropdown-item" data-filter="cybersec">Cybersecurity</li>
-              <li class="dropdown-item" data-filter="infrastructure">Infrastructure</li>
-              <li class="dropdown-item" data-filter="web">Web Development</li>
-              <li class="dropdown-item" data-filter="automation">Automation</li>
-              <li class="dropdown-item" data-filter="docs">Documentation</li>
+              <li class="dropdown-item" data-filter="infrastructure">Infrastructure & DevOps</li>
+              <li class="dropdown-item" data-filter="personal">Personal</li>
+              <li class="dropdown-item" data-filter="commissioned">Commissioned</li>
             </ul>
           </div>
         </div>
 
         <div class="project-grid">
+
+          <!-- ── Security & Technical ─────────────────────────────── -->
+          <div class="project-section-label"><h4>Security &amp; Technical</h4></div>
+
           <!-- Project Card - Python Security Projects -->
-          <article class="project-card" data-notion-url="https://paristech1.github.io/Python-Cyber-Security-projects/" data-category="cybersec automation">
+          <article class="project-card" data-notion-url="https://paristech1.github.io/Python-Cyber-Security-projects/" data-category="cybersec">
             <div class="project-card-image">
-              <span class="project-badge badge-cybersec">Cyber sec</span>
+              <span class="project-badge badge-cybersec">Cyber Sec</span>
               <img src="/src/assets/python-security-thumbnail.png" alt="Python Security Projects - Port Scanner, Log Analysis, File Integrity Checker">
             </div>
             <div class="project-card-content">
@@ -363,11 +372,11 @@
           <!-- Project Card - Kali-Linux Social Engineering Lab -->
           <article class="project-card" data-notion-url="https://www.notion.so/Cloud-Based-Social-Engineering-Lab-Credential-Harvesting-Detection-Prevention-Training-AWS-Kal-2d2109e8856180f4ba2cc276c413c89d?source=copy_link" data-category="cybersec infrastructure">
             <div class="project-card-image">
-              <span class="project-badge badge-cybersec">Cyber sec</span>
+              <span class="project-badge badge-cybersec">Cyber Sec</span>
               <img src="/src/assets/kali-linux-logo.svg" alt="Kali Linux Logo - Social Engineering Lab">
             </div>
             <div class="project-card-content">
-              <h3>Kali-Linux Social Engineering Lab: Credential Harvesting Detection</h3>
+              <h3>Kali Linux Social Engineering Lab: Credential Harvesting Detection</h3>
               <p>Architected and operated a controlled, cloud-hosted adversary simulation environment on AWS EC2 to replicate real-world credential phishing attacks—enabling hands-on training in attack detection, log forensics, and blue team defensive workflows. The lab leveraged Kali Linux and the Social-Engineer Toolkit (SET) to clone a legitimate web login page and capture simulated credential submissions via HTTP traffic. The infrastructure utilized dynamic Linux user provisioning and XRDP remote desktop configuration to enable GUI-based attack execution and monitoring. The design emphasized enterprise-grade security controls—AWS Security Group hardening, IAM-restricted EC2 access, and ephemeral instance teardown—while maintaining extremely low operating cost during the validation phase.</p>
               <div class="project-tags">
                 <span class="tag">AWS EC2</span>
@@ -379,29 +388,10 @@
             </div>
           </article>
 
-          <!-- Project Card - SpeedBump -->
-          <article class="project-card" data-project-page="speedbumps.html" data-category="web automation">
-            <div class="project-card-image">
-              <span class="project-badge badge-web">MOBILE APP</span>
-              <img src="/src/assets/speedbump-thumbnail.png" alt="SpeedBump - Philly Speed Bump Navigation">
-            </div>
-            <div class="project-card-content">
-              <h3>SpeedBump: Outsmarting Philly's Speed Bumps</h3>
-              <p>A specialized navigation app designed to help drivers navigate Philadelphia's streets more smoothly by avoiding the city's 1,584+ officially installed speed bumps, humps, and cushions. Built with Flutter, it integrates OpenDataPhilly's traffic calming dataset with smart avoidance routing.</p>
-              <div class="project-tags">
-                <span class="tag">Flutter</span>
-                <span class="tag">HERE Routing API</span>
-                <span class="tag">OpenDataPhilly</span>
-                <span class="tag">Turf.js</span>
-                <span class="tag">Firebase</span>
-              </div>
-            </div>
-          </article>
-
           <!-- Project Card - MD5 Checksum -->
           <article class="project-card" data-notion-url="https://www.notion.so/MD5-Checksum-project-31e109e88561803bb481dab947cc9244#31e109e8856180dba1dcf02cbe506bf6" data-category="cybersec">
             <div class="project-card-image">
-              <span class="project-badge badge-cybersec">Cyber sec</span>
+              <span class="project-badge badge-cybersec">Cyber Sec</span>
               <img src="/src/assets/md5-checksum-thumbnail.png" alt="MD5 Checksum - Secure File Verification">
             </div>
             <div class="project-card-content">
@@ -412,25 +402,6 @@
                 <span class="tag">Cryptography</span>
                 <span class="tag">File Integrity</span>
                 <span class="tag">MD5 Hashing</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project Card - PhilaBag Nonprofit Website -->
-          <article class="project-card" data-notion-url="https://www.philabag.org" data-category="web">
-            <div class="project-card-image">
-              <span class="project-badge badge-live">LIVE</span>
-              <img src="/src/assets/philabag-thumbnail.png" alt="PhilaBag Nonprofit Website - Impactful Hero">
-            </div>
-            <div class="project-card-content">
-              <h3>PhilaBag Nonprofit Website</h3>
-              <p>Designed, built, and deployed the official website for PhilaBag, a Philadelphia-based nonprofit dedicated to environmental stewardship and watershed maintenance. Managed the complete project lifecycle from UI/UX design to hosting and domain deployment, creating a community platform that supports volunteer coordination and fundraising initiatives.</p>
-              <div class="project-tags">
-                <span class="tag">Web Design</span>
-                <span class="tag">Full-Stack Development</span>
-                <span class="tag">Deployment</span>
-                <span class="tag">Hosting Management</span>
-                <span class="tag">Community Engagement</span>
               </div>
             </div>
           </article>
@@ -454,8 +425,50 @@
             </div>
           </article>
 
+          <!-- ── Personal Projects ────────────────────────────────── -->
+          <div class="project-section-label"><h4>Personal Projects</h4></div>
+
+          <!-- Project Card - WrestleDream Floci Docker Terraform -->
+          <article class="project-card" data-notion-url="https://www.notion.so/WrestleDream-Floci-Docker-Terraform-Local-AWS-Runbook-367109e88561810981b9cfad7870886f" data-category="infrastructure personal">
+            <div class="project-card-image">
+              <span class="project-badge badge-infrastructure">INFRASTRUCTURE</span>
+              <img src="/src/assets/wrestledream-floci-runbook-thumbnail.svg" alt="WrestleDream — Floci, Docker, and Terraform local AWS deployment">
+            </div>
+            <div class="project-card-content">
+              <h3>WrestleDream: Floci + Docker + Terraform</h3>
+              <p>Documented and executed a full local AWS deployment of WrestleDream (FastAPI + React/Vite): containerized Floci as a Docker-based AWS emulator, provisioned ~20 resources with Terraform (Lambda, API Gateway, DynamoDB, S3, SSM, IAM), packaged ARM64 Lambda builds, and captured phased deployment workflows—from health checks through tear-down and redeploy in under 30 seconds.</p>
+              <div class="project-tags">
+                <span class="tag">Docker</span>
+                <span class="tag">Terraform</span>
+                <span class="tag">Floci</span>
+                <span class="tag">AWS</span>
+                <span class="tag">Infrastructure as Code</span>
+                <span class="tag">FastAPI</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project Card - SpeedBump -->
+          <article class="project-card" data-project-page="speedbumps.html" data-category="personal">
+            <div class="project-card-image">
+              <span class="project-badge badge-personal">PERSONAL</span>
+              <img src="/src/assets/speedbump-thumbnail.png" alt="SpeedBump - Philly Speed Bump Navigation">
+            </div>
+            <div class="project-card-content">
+              <h3>SpeedBump: Outsmarting Philly's Speed Bumps</h3>
+              <p>A specialized navigation app designed to help drivers navigate Philadelphia's streets more smoothly by avoiding the city's 1,584+ officially installed speed bumps, humps, and cushions. Built with Flutter, it integrates OpenDataPhilly's traffic calming dataset with smart avoidance routing.</p>
+              <div class="project-tags">
+                <span class="tag">Flutter</span>
+                <span class="tag">HERE Routing API</span>
+                <span class="tag">OpenDataPhilly</span>
+                <span class="tag">Turf.js</span>
+                <span class="tag">Firebase</span>
+              </div>
+            </div>
+          </article>
+
           <!-- Project Card - NBA Showdown -->
-          <article class="project-card" data-project-page="nba-showdown.html" data-category="web">
+          <article class="project-card" data-project-page="nba-showdown.html" data-category="personal">
             <div class="project-card-image">
               <span class="project-badge badge-personal">PERSONAL</span>
               <img src="/src/assets/nba-showdown-cover.png" alt="NBA Showdown - Daily Performance Comparison App">
@@ -464,7 +477,31 @@
               <h3>NBA Showdown</h3>
               <p>An interactive daily NBA stats app: head-to-head player showdowns, top stat leaders, and a built-in interactive walkthrough of how the code works.</p>
               <div class="project-tags">
-                <span class="tag">Personal</span>
+                <span class="tag">React</span>
+                <span class="tag">NBA API</span>
+                <span class="tag">Data Visualization</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- ── Commissioned Work ────────────────────────────────── -->
+          <div class="project-section-label"><h4>Commissioned Work</h4></div>
+
+          <!-- Project Card - PhilaBag Nonprofit Website -->
+          <article class="project-card" data-notion-url="https://www.philabag.org" data-category="commissioned">
+            <div class="project-card-image">
+              <span class="project-badge badge-commissioned">COMMISSIONED</span>
+              <img src="/src/assets/philabag-thumbnail.png" alt="PhilaBag Nonprofit Website - Impactful Hero">
+            </div>
+            <div class="project-card-content">
+              <h3>PhilaBag Nonprofit Website</h3>
+              <p>Designed, built, and deployed the official website for PhilaBag, a Philadelphia-based nonprofit dedicated to environmental stewardship and watershed maintenance. Managed the complete project lifecycle from UI/UX design to hosting and domain deployment, creating a community platform that supports volunteer coordination and fundraising initiatives.</p>
+              <div class="project-tags">
+                <span class="tag">Web Design</span>
+                <span class="tag">Full-Stack Development</span>
+                <span class="tag">Deployment</span>
+                <span class="tag">Hosting Management</span>
+                <span class="tag">Community Engagement</span>
               </div>
             </div>
           </article>

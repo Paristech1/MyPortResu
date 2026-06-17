@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AD Attack & Detection Home Lab (Splunk SIEM) | Portfolio</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo logo--header logo--desktop-only"><a href="index.html"><span class="highlight">Paris</span>.</a></div>
+    <nav class="nav">
+      <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experience">Work</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="project-detail">
+      <div class="container">
+        <a href="index.html" class="logo logo--scroll logo--mobile-only"><span class="highlight">Paris</span>.</a>
+
+        <!-- Project Hero -->
+        <div class="project-detail-hero">
+          <span class="project-badge badge-cybersec">Cyber Sec</span>
+          <h1 class="reveal-text">AD Attack &amp; Detection Home Lab</h1>
+          <p class="reveal-text project-detail-subtitle">
+            A hands-on blue-team home lab built from bare metal up: a Windows Active Directory domain running on Apple Silicon via UTM, a Splunk SIEM ingesting Windows Security logs from every host through Universal Forwarders, and a hybrid-identity bridge into Microsoft Entra ID — the foundation for simulating real attacks and writing the SPL detections that catch them.
+          </p>
+          <div class="project-detail-cover" style="margin-bottom: 2rem;">
+            <img src="/src/assets/splunk/09-splunk-events.png" alt="Splunk receiving Windows Security events from forwarded hosts">
+          </div>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://app.notion.com/p/374109e88561818ab5a2c63134de2c7b" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.9rem;">
+              Full Project Journal ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Overview -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Lab Overview</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            The goal of this lab is to recreate a small enterprise network end-to-end and then defend it. Rather than spin up managed cloud services, I built the whole environment on a single Mac to prove the fundamentals: virtualization, Active Directory administration, log pipelines, and SIEM analysis. Once data is flowing, the same environment becomes a range for adversary simulation and detection engineering.
+          </p>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><strong>Virtualization layer:</strong> Windows Server 2022 (Domain Controller) and a Windows desktop client, both running as ARM VMs under UTM on Apple Silicon.</li>
+            <li><strong>Active Directory:</strong> Promoted the server to a Domain Controller, then built out Organizational Units, users, and groups to mirror a real domain structure.</li>
+            <li><strong>SIEM:</strong> Splunk running on the Mac as the indexer/receiver, with Splunk Universal Forwarders on each Windows host shipping <code>WinEventLog:Security</code> data over TCP 9997.</li>
+            <li><strong>Hybrid identity:</strong> A free Microsoft Entra ID tenant connected to the on-prem directory via Entra Cloud Sync — the modern replacement for the decommissioned Entra Connect.</li>
+          </ul>
+        </div>
+
+        <!-- Build Gallery -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Building the Domain</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            Standing up Windows Server and the desktop client as virtual machines in UTM, promoting the server to a Domain Controller, and organizing the directory into Organizational Units.
+          </p>
+          <div class="project-mockup-grid">
+            <div class="project-mockup-item">
+              <img src="/src/assets/splunk/05-windows-utm.png" alt="Windows VM running under UTM on Apple Silicon">
+            </div>
+            <div class="project-mockup-item">
+              <img src="/src/assets/splunk/06-ad-setup.png" alt="Setting up Active Directory in Windows Server 2022">
+            </div>
+            <div class="project-mockup-item">
+              <img src="/src/assets/splunk/07-making-ous.png" alt="Creating Organizational Units in Active Directory">
+            </div>
+            <div class="project-mockup-item">
+              <img src="/src/assets/splunk/08-making-ous.png" alt="Active Directory Users and Computers with Organizational Units">
+            </div>
+            <div class="project-mockup-item">
+              <img src="/src/assets/splunk/03-vm-setup.png" alt="VM configuration in UTM">
+            </div>
+            <div class="project-mockup-item">
+              <img src="/src/assets/splunk/04-vm-setup.png" alt="Windows installation inside UTM">
+            </div>
+          </div>
+        </div>
+
+        <!-- Splunk Pipeline -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Getting Logs Into Splunk</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            With the domain running, the next milestone was wiring every Windows host into Splunk so security events could be searched in one place. Both Windows hosts now forward into the Mac-hosted Splunk receiver on port 9997:
+          </p>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><strong>Desktop client (DESKTOP-EL6QVN3):</strong> 3,624 events landing, with <code>WinEventLog:Security</code> visible — including EventCode 4624 (logon) and 4672 (special privileges assigned).</li>
+            <li><strong>Domain Controller (WIN-83VFO41O2VB):</strong> 2,034 events landing and indexed.</li>
+            <li>Splunk receiver on TCP 9997 confirmed enabled and accepting forwarder connections.</li>
+          </ul>
+          <div class="project-detail-cover" style="margin-bottom: 1.5rem;">
+            <img src="/src/assets/splunk/09-splunk-events.png" alt="Splunk search showing forwarded Windows Security events">
+          </div>
+        </div>
+
+        <!-- Lessons Learned -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Lessons Learned the Hard Way</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            The most valuable part of building infrastructure by hand is the troubleshooting. A few hard-won takeaways from getting the forwarding pipeline working:
+          </p>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><strong>A fresh Universal Forwarder ships nothing by default.</strong> I had to author an <code>inputs.conf</code> with <code>[WinEventLog://...]</code> stanzas on each host before any data flowed — the 9997 TCP connection alone carries no log data.</li>
+            <li><strong>The Notepad trap (~1 hour lost on the DC):</strong> Notepad silently saved <code>inputs.conf.txt</code> while the real <code>inputs.conf</code> stayed empty, so the forwarder read nothing. The fix: always run <code>Get-Content inputs.conf</code> to confirm it has content before restarting.</li>
+            <li><strong>Disk space matters:</strong> Splunk refuses to run searches when free disk drops below 5000 MB — had to clear space on the Mac.</li>
+            <li><strong>PATH gotcha:</strong> <code>splunk.exe</code> isn't on PATH; restart with the full path — <code>&amp; "C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe" restart</code>.</li>
+          </ul>
+        </div>
+
+        <!-- Entra ID -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Hybrid Identity with Entra ID</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            With logging in place, the lab grew toward hybrid identity — syncing the on-prem Active Directory into a cloud Microsoft Entra ID tenant.
+          </p>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li>Created a free Entra tenant ("ForMy Labs") via the M365 Business trial no-card route — the tenant directory is provisioned <em>before</em> the payment-card wall and persists afterward.</li>
+            <li>Chose <strong>Entra Cloud Sync</strong> (a lightweight provisioning agent) over the now-decommissioned classic Entra Connect MSI.</li>
+            <li><strong>Blocker found &amp; diagnosed:</strong> the Cloud Sync config page returned <code>HTTP 401 — "Guest users are not allowed to configure sync."</code> because the Gmail sign-in was a guest/external identity. The fix: create a cloud-only <em>member</em> admin, assign Global Administrator, and reconfigure sync as that account.</li>
+          </ul>
+        </div>
+
+        <!-- Roadmap -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Roadmap</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            This lab is an in-progress build. With the domain, SIEM pipeline, and hybrid identity foundation in place, the remaining phases turn it into a full attack-and-detect range:
+          </p>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li>Finish Entra Cloud Sync with the cloud-only member admin account.</li>
+            <li>Stand up a Kali Linux attack box on the same network.</li>
+            <li>Run attack simulations against the domain (logon abuse, privilege escalation, lateral movement).</li>
+            <li>Write SPL detection rules in Splunk to catch each technique.</li>
+            <li>Build dashboards to visualize detections and host telemetry.</li>
+          </ul>
+        </div>
+
+        <!-- Skills -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Skills Demonstrated</h2>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><strong>SIEM Administration:</strong> Splunk indexer/receiver setup, Universal Forwarder deployment, and <code>inputs.conf</code> tuning.</li>
+            <li><strong>Windows &amp; Active Directory:</strong> Domain Controller promotion, OU/user/group design, Windows Security event analysis.</li>
+            <li><strong>Virtualization:</strong> Building and networking Windows VMs on Apple Silicon with UTM.</li>
+            <li><strong>Cloud Identity:</strong> Microsoft Entra ID tenant provisioning and hybrid sync with Entra Cloud Sync.</li>
+            <li><strong>Troubleshooting &amp; Documentation:</strong> Methodical root-cause analysis captured in a running progress journal.</li>
+          </ul>
+        </div>
+
+        <!-- Back to Projects -->
+        <div class="projects-cta">
+          <a href="projects.html" class="btn-primary">
+            ← Back to Projects
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

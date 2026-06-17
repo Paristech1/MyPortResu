@@ -12,6 +12,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         projects: resolve(__dirname, 'projects.html'),
         nbaShowdown: resolve(__dirname, 'nba-showdown.html'),
+        splunk: resolve(__dirname, 'splunk.html'),
         speedbumps: resolve(__dirname, 'speedbumps.html'),
         encryption: resolve(__dirname, 'encryption.html'),
       },
