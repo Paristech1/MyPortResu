@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Velociraptor DFIR Lab - Endpoint Monitoring project thumbnail">
+  <defs>
+    <linearGradient id="velo-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5eead4"/>
+      <stop offset="55%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <pattern id="velo-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#0e7490" stroke-width="0.6" opacity="0.35"/>
+    </pattern>
+    <filter id="velo-soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.4" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="600" height="400" fill="#06121a"/>
+  <rect width="600" height="400" fill="url(#velo-grid)" opacity="0.6"/>
+
+  <!-- Raptor footprint -->
+  <g transform="translate(42, 150) scale(1.05)" fill="url(#velo-glow)" filter="url(#velo-soft)">
+    <path d="M60 0 C66 18 64 34 56 44 C70 42 80 50 80 62 C72 58 64 58 58 62 C60 74 56 86 48 92 C50 80 46 72 40 70 C34 78 24 82 14 80 C26 74 30 66 28 58 C18 60 8 56 2 46 C16 50 26 46 30 38 C22 30 20 18 26 6 C32 20 42 26 50 24 C52 16 54 8 60 0 Z"/>
+  </g>
+
+  <text x="585" y="70" text-anchor="end" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-weight="800" font-size="34" fill="url(#velo-glow)" filter="url(#velo-soft)">VELOCIRAPTOR</text>
+  <text x="585" y="98" text-anchor="end" font-family="ui-monospace, Consolas, monospace" font-size="13" fill="#67e8f9" letter-spacing="1.5">DFIR · ENDPOINT MONITORING</text>
+
+  <!-- VQL console -->
+  <rect x="178" y="128" width="408" height="238" rx="6" fill="rgba(4, 22, 30, 0.9)" stroke="#155e63" stroke-width="1.2"/>
+  <g font-family="ui-monospace, Consolas, monospace" font-size="10.5">
+    <text x="194" y="152" fill="#22d3ee">velociraptor &gt; frontend -v</text>
+    <text x="194" y="172" fill="#7dd3fc">[INFO] GUI bound 0.0.0.0:8889</text>
+    <text x="194" y="192" fill="#7dd3fc">[INFO] client frontend :8000</text>
+    <text x="194" y="216" fill="#5eead4">client  DESKTOP-EL6QVN3  <tspan fill="#34d399" font-weight="700">● connected</tspan></text>
+    <text x="194" y="240" fill="#94a3b8">SELECT * FROM netstat()</text>
+    <text x="210" y="260" fill="#a5f3fc">Name   : Velociraptor.exe</text>
+    <text x="210" y="278" fill="#a5f3fc">Status : ESTAB</text>
+    <text x="210" y="296" fill="#a5f3fc">Raddr  : 192.168.64.8</text>
+    <text x="210" y="314" fill="#fbbf24">RPort  : 8000   <tspan fill="#fca5a5">// flag</tspan></text>
+    <text x="194" y="342" fill="#67e8f9">VFS · registry · ntfs · netstat</text>
+    <text x="194" y="360" fill="#ecfeff">&gt;<tspan fill="#2dd4bf" font-weight="700">█</tspan></text>
+  </g>
+</svg>

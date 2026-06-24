@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATT&amp;CK Labs | Portfolio</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo logo--header logo--desktop-only"><a href="index.html"><span class="highlight">Paris</span>.</a></div>
+    <nav class="nav">
+      <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experience">Work</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="project-detail">
+      <div class="container">
+        <a href="index.html" class="logo logo--scroll logo--mobile-only"><span class="highlight">Paris</span>.</a>
+
+        <!-- Project Hero -->
+        <div class="project-detail-hero">
+          <span class="project-badge badge-cybersec">Cyber Sec</span>
+          <h1 class="reveal-text">ATT&amp;CK Labs — MITRE Navigator</h1>
+          <p class="reveal-text project-detail-subtitle">
+            A hands-on lab working with the MITRE ATT&amp;CK framework and the live ATT&amp;CK Navigator — building technique layers and mapping adversary behavior to the tactics and techniques (TTPs) that defenders use to describe, hunt, and detect attacks. The shared vocabulary that turns a raw alert into "this is T1059.003" and points straight at the detection that should catch it.
+          </p>
+          <div class="project-detail-cover" style="margin-bottom: 2rem;">
+            <img src="/src/assets/attack-labs-thumbnail.svg" alt="MITRE ATT&CK Navigator technique matrix with a highlighted technique layer">
+          </div>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://app.notion.com/p/35f109e8856180d1999aca8da111c27d" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.9rem;">
+              Full Project Journal ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Overview -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Lab Overview</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            MITRE ATT&amp;CK is a globally-adopted knowledge base of real-world adversary behavior, organized into <strong>tactics</strong> (the attacker's goal — initial access, execution, persistence, privilege escalation, exfiltration) and the <strong>techniques</strong> they use to get there. The ATT&amp;CK Navigator is the interactive matrix layered on top of it. This lab — completed through Sam Bowne's coursework (samsclass.info) — is hands-on practice driving the Navigator and thinking in TTPs.
+          </p>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><strong>The matrix:</strong> navigated the full ATT&amp;CK enterprise matrix — tactics across the top, techniques and sub-techniques in each column.</li>
+            <li><strong>Technique layers:</strong> built and colored Navigator layers to highlight and score techniques relevant to a scenario.</li>
+            <li><strong>TTP mapping:</strong> practiced mapping observed behavior to a specific technique ID — the muscle a SOC analyst uses every shift.</li>
+          </ul>
+        </div>
+
+        <!-- Mapping behavior -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Mapping Behavior to Techniques</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            The core skill ATT&amp;CK builds is translating raw activity into a shared, searchable vocabulary. When a host runs something suspicious, the analyst's job is to name <em>what</em> the adversary did, not just that "something happened":
+          </p>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li>A <code>cmd.exe</code> command line maps to <strong>T1059.003 — Command and Scripting Interpreter: Windows Command Shell</strong>.</li>
+            <li>Each technique carries its tactic, data sources, detection guidance, and mitigations — so naming the TTP immediately points toward the telemetry and the detection that should fire.</li>
+            <li>Layering many mapped techniques in the Navigator turns a single incident into a coverage picture: what an adversary did, and where my detections have gaps.</li>
+          </ul>
+        </div>
+
+        <!-- Why It Matters -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Why It Matters</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            ATT&amp;CK is the lingua franca of modern blue teams. Threat intel reports, detection rules, and SOC investigations all reference technique IDs, so fluency in the framework is foundational to detection engineering and incident response. This lab is the connective tissue between my other work — the adversary techniques I simulate in the AD attack lab, the Splunk detections I write to catch them, and the endpoint artifacts I collect in the Velociraptor DFIR lab all map back to ATT&amp;CK.
+          </p>
+        </div>
+
+        <!-- Skills -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Skills Demonstrated</h2>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><strong>MITRE ATT&amp;CK fluency:</strong> tactics, techniques, sub-techniques, and the enterprise matrix.</li>
+            <li><strong>ATT&amp;CK Navigator:</strong> building, scoring, and coloring technique layers.</li>
+            <li><strong>TTP mapping:</strong> translating observed behavior into specific technique IDs.</li>
+            <li><strong>Detection mindset:</strong> using technique data sources and detection guidance to drive coverage.</li>
+          </ul>
+        </div>
+
+        <!-- Back to Projects -->
+        <div class="projects-cta">
+          <a href="projects.html" class="btn-primary">
+            ← Back to Projects
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

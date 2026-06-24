@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velociraptor DFIR Lab | Portfolio</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo logo--header logo--desktop-only"><a href="index.html"><span class="highlight">Paris</span>.</a></div>
+    <nav class="nav">
+      <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experience">Work</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="project-detail">
+      <div class="container">
+        <a href="index.html" class="logo logo--scroll logo--mobile-only"><span class="highlight">Paris</span>.</a>
+
+        <!-- Project Hero -->
+        <div class="project-detail-hero">
+          <span class="project-badge badge-cybersec">Cyber Sec</span>
+          <h1 class="reveal-text">Velociraptor DFIR Lab — Endpoint Monitoring</h1>
+          <p class="reveal-text project-detail-subtitle">
+            Stood up an open-source DFIR collection platform from scratch and used it to remotely monitor and investigate a live Windows endpoint — replicating the core triage workflow a SOC or incident-response team runs against a compromised machine. A Velociraptor server on Kali Linux, a Windows 11 agent reporting in over TLS, and live forensic collection of filesystem, registry, and network artifacts from a central console.
+          </p>
+          <div class="project-detail-cover" style="margin-bottom: 2rem;">
+            <img src="/src/assets/velociraptor-thumbnail.svg" alt="Velociraptor DFIR lab — VQL console monitoring a Windows endpoint">
+          </div>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://app.notion.com/p/388109e885618011b604c4920e05e8bc" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.9rem;">
+              Full Project Journal ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Overview -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Lab Overview</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            A two-node investigation lab running entirely in virtual machines on Apple Silicon (UTM). The goal: deploy endpoint visibility, then investigate — exactly what an analyst does when a security alert fires and there's no time to physically image every hard drive. Based on Sam Bowne's CNIT 152 lab <em>"IR 371: Velociraptor Server on Linux."</em>
+          </p>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><strong>Velociraptor server:</strong> Kali Linux (ARM64) hosting the collection server and web console.</li>
+            <li><strong>Monitored endpoint:</strong> Windows 11 (x86_64) running the Velociraptor agent, reporting in over TLS.</li>
+            <li><strong>Network:</strong> both VMs on a shared virtual network so the agent could reach the server frontend.</li>
+          </ul>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            Velociraptor is an open-source DFIR and threat-hunting platform (maintained by Rapid7). A lightweight agent runs on endpoints; a central server lets investigators query them using <strong>VQL</strong> (Velociraptor Query Language) — a SQL-like language that interrogates a machine's live state. Reusable VQL bundles are <strong>artifacts</strong>; running one across a whole fleet at once is a <strong>hunt</strong>. It's often described as an open-source alternative to commercial EDR, leaning toward investigation and hunting rather than automated real-time blocking.
+          </p>
+        </div>
+
+        <!-- What I Did -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Building the Platform</h2>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li>Deployed the <strong>Velociraptor server (v0.77.1)</strong> on Linux — downloaded the binary, generated the server configuration, and bound the web GUI and client frontend to the host's network IP so the endpoint could connect.</li>
+            <li>Configured <strong>secure TLS client-server communications</strong> and created an administrator account for the console.</li>
+            <li>Packaged a <strong>Windows agent (MSI)</strong> using the server's built-in artifact, served it over HTTP, and installed it on the Windows 11 endpoint.</li>
+            <li>Confirmed the agent <strong>checked in and registered</strong> in the console — establishing live, two-way endpoint visibility.</li>
+          </ul>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            <strong>Setup note:</strong> because the host is Apple Silicon, the <code>arm64</code> server binary was used (the project assumes amd64), and the GUI <code>bind_address</code> had to be changed from <code>127.0.0.1</code> to <code>0.0.0.0</code> so the endpoint on the virtual network could reach the console.
+          </p>
+        </div>
+
+        <!-- Investigation -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Investigating the Endpoint</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            With the agent live, I used the console to remotely investigate the endpoint without disturbing the evidence — browsing the disk, registry, and network state through the agent rather than touching the live OS. The lab is graded by five "flags," each proving a different investigation capability:
+          </p>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><strong>371.1 — Server Version:</strong> read the build/version from the console "Server status" dashboard, confirming a working management plane.</li>
+            <li><strong>371.2 — Agent Name:</strong> the Windows agent (<code>DESKTOP-EL6QVN3</code>) checked in and registered — live, two-way visibility over TLS.</li>
+            <li><strong>371.3 — Registry:</strong> remotely read the endpoint's live Windows registry (<code>HKEY_CURRENT_USER</code>) through the Virtual File System — a core forensic source for persistence and user activity.</li>
+            <li><strong>371.4 — File System:</strong> raw NTFS browsing of the remote disk (<code>\\.\C:</code> → Users → Default); the agent parses the filesystem directly, seeing files the live OS would hide.</li>
+            <li><strong>371.5 — DestPort / RPort:</strong> collected a live network artifact and identified the agent's own outbound beacon back to the server.</li>
+          </ul>
+        </div>
+
+        <!-- The Network Flag -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Reading the Network Artifact</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            Collecting a netstat artifact and filtering it surfaced the established TCP session from the Windows endpoint back to the Kali server — the agent's own beacon to the frontend on port <strong>8000</strong>:
+          </p>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><code>"Name": "Velociraptor.exe"</code>, <code>"Status": "ESTAB"</code></li>
+            <li><code>"Laddr.IP": "192.168.64.51"</code> — the Windows endpoint</li>
+            <li><code>"Raddr.IP": "192.168.64.8"</code> — the Kali server</li>
+            <li><code>"Raddr.Port": 8000</code> — the flag: the channel built earlier in the lab</li>
+          </ul>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Troubleshooting — The Real DFIR Work</h2>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><strong>VFS "No data available":</strong> a refresh initially returned nothing because the client had briefly dropped offline. The VFS only works against a live, connected client — once it showed green <strong>Connected</strong>, refreshing populated the tree.</li>
+            <li><strong>Hung enrichment artifact:</strong> the project's <code>Windows.Network.NetstatEnriched</code> artifact repeatedly stalled (state stuck on "running", 0 rows) on the emulated Windows VM. I verified the service account with <code>sc qc velociraptor</code>, ruled out a privilege issue, then switched to the plain <code>Windows.Network.Netstat</code> artifact, which completed instantly (47 rows).</li>
+            <li><strong>Bonus observation:</strong> the same netstat dump revealed a <code>splunkd.exe</code> process beaconing out on <code>9997</code> — a Splunk forwarder shipping logs, tying back to my Splunk SIEM lab.</li>
+          </ul>
+        </div>
+
+        <!-- Skills -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Skills Demonstrated</h2>
+          <ul class="job-duties" style="margin-bottom: 1.5rem;">
+            <li><strong>DFIR tooling:</strong> endpoint agent deployment, remote evidence collection, forensic VFS browsing.</li>
+            <li><strong>Linux server administration:</strong> config editing, services, and file delivery over HTTP.</li>
+            <li><strong>Networking &amp; TLS:</strong> client-server setup across virtual machines with secure communications.</li>
+            <li><strong>Virtualization:</strong> UTM on Apple Silicon with ARM and emulated x86 guests.</li>
+            <li><strong>IR workflow:</strong> understanding the incident-response triage process and where it fits in a security operation.</li>
+          </ul>
+        </div>
+
+        <!-- Why It Matters -->
+        <div class="project-detail-section">
+          <h2 class="section-subtitle">Why It Matters</h2>
+          <p class="project-detail-text" style="margin-bottom: 1.5rem;">
+            When a security alert fires, responders rarely have time to physically image every hard drive. Tools like Velociraptor let an analyst query endpoints remotely and at scale — pulling processes, registry keys, files, and network state from a central console in minutes. This lab is that workflow in miniature: deploy visibility, then investigate. It maps directly to the day-to-day of a junior SOC / DFIR analyst.
+          </p>
+        </div>
+
+        <!-- Back to Projects -->
+        <div class="projects-cta">
+          <a href="projects.html" class="btn-primary">
+            ← Back to Projects
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

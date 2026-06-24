@@ -13,6 +13,8 @@ export default defineConfig({
         projects: resolve(__dirname, 'projects.html'),
         nbaShowdown: resolve(__dirname, 'nba-showdown.html'),
         splunk: resolve(__dirname, 'splunk.html'),
+        velociraptor: resolve(__dirname, 'velociraptor.html'),
+        attackLabs: resolve(__dirname, 'attack-labs.html'),
         speedbumps: resolve(__dirname, 'speedbumps.html'),
         encryption: resolve(__dirname, 'encryption.html'),
       },
